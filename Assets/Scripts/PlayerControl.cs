@@ -19,6 +19,7 @@ public class PlayerControl : MonoBehaviour {
         PlayerMove();
 
     }
+    //comment
 
     void PlayerMove() {
         moveX = Input.GetAxis( "Horizontal" );
