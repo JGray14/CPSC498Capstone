@@ -23,20 +23,35 @@ public class PlayerControl : MonoBehaviour {
 
     void PlayerMove() {
         moveX = Input.GetAxis( "Horizontal" );
+
         if ( Input.GetButtonDown( "Jump" ) ) {
             Jump();
         }
+
+        //if ( Input.GetButtonDown( "" ) ){
+        //  Dash();
+        //}
+
         if ( moveX > 0.0f && facingRight == false ) {
             FlipPlayer();
         } else if ( moveX < 0.0f && facingRight == true ) {
             FlipPlayer();
         }
+
         gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2( moveX * playerSpeed, gameObject.GetComponent<Rigidbody2D>().velocity.y );
 
     }
 
     void Jump() {
         GetComponent<Rigidbody2D>().AddForce( Vector2.up * playerJumpPower );
+    }
+
+    void Dash() {
+        if ( facingRight ) {
+
+        } else {
+
+        }
     }
 
     void FlipPlayer() {
