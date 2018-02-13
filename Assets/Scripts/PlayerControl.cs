@@ -59,19 +59,14 @@ public class PlayerControl : MonoBehaviour {
         GetComponent<Rigidbody2D>().AddForce( Vector2.up * playerJumpPower );
     }
 
-    //Dash cooldown is working fine, but can't get the actual dash to work to the extent it should, the 2 solutions below move you all of 3 pixels.
     void Dash() {
         DashCooldown = 50;
         if ( facingRight ) {
             GetComponent<Rigidbody2D>().AddForce( new Vector2 ( playerDashPower, 0 ), ForceMode2D.Force );
             DashImpulse = 10;
-            //GetComponent<Rigidbody2D>().AddForce( Vector2.right * playerDashPower );
-            //GetComponent<Rigidbody2D>().velocity = new Vector2( -playerDashPower * playerSpeed, gameObject.GetComponent<Rigidbody2D>().velocity.y );
         } else {
             GetComponent<Rigidbody2D>().AddForce( new Vector2( -playerDashPower, 0 ), ForceMode2D.Force );
             DashImpulse = -10;
-            //GetComponent<Rigidbody2D>().AddForce( Vector2.left * playerDashPower );
-            //GetComponent<Rigidbody2D>().velocity = new Vector2( -playerDashPower * playerSpeed, gameObject.GetComponent<Rigidbody2D>().velocity.y );
         }
     }
 
