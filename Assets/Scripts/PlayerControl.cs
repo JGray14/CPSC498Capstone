@@ -6,15 +6,19 @@ public class PlayerControl : MonoBehaviour {
 
     public int playerSpeed = 10;
     private bool facingRight = true;
+    private int playerJumpNum = 0;
     public int playerJumpPower = 1250;
     public int DashCooldown = 0;
     public int DashImpulse = 0;
     public int playerDashPower = 1000;
     private float moveX;
 
+    private Animator animator;
+    public float speed = 1f;
+
     // Use this for initialization
     void Start () {
-		
+        animator = this.GetComponent<Animator>();
 	}
 	
 	// Update is called once per frame
@@ -25,6 +29,13 @@ public class PlayerControl : MonoBehaviour {
 
     void PlayerMove() {
         moveX = Input.GetAxis( "Horizontal" );
+        
+        //need to stop animation when player stops
+        if (moveX != 0)
+        {
+            animator.Play("PlayerWarrior_Move");
+        }
+        
 
         if ( DashCooldown > 0 ) {
             DashCooldown--;
@@ -37,10 +48,16 @@ public class PlayerControl : MonoBehaviour {
             DashImpulse++;
         }
 
-
-        if ( Input.GetButtonDown( "Jump" ) || Input.GetButtonDown( "Jump (Controller)" ) ) {
+        if ( (Input.GetButtonDown( "Jump" ) || Input.GetButtonDown( "Jump (Controller)" )) && playerJumpNum != 2) {
             Jump();
+            playerJumpNum++;
         }
+
+        if (isGrounded() == true)
+        {
+            playerJumpNum = 0;
+        }
+
 
         if ( ( Input.GetButtonDown( "Dash" ) || Input.GetAxis( "Dash (Controller)" ) == 1 ) && DashCooldown == 0 ) {
           Dash();
@@ -55,6 +72,17 @@ public class PlayerControl : MonoBehaviour {
 
     }
 
+    //funct to check if char is grounded. not done/working
+    bool isGrounded()
+    {
+        if (Physics2D.Raycast(transform.position, Vector2.down, 1.0f).collider != null)
+        {
+            return true;
+        }
+
+        return false;
+    }
+
     void Jump() {
         GetComponent<Rigidbody2D>().AddForce( Vector2.up * playerJumpPower );
     }
@@ -64,9 +92,12 @@ public class PlayerControl : MonoBehaviour {
         if ( facingRight ) {
             GetComponent<Rigidbody2D>().AddForce( new Vector2 ( playerDashPower, 0 ), ForceMode2D.Force );
             DashImpulse = 10;
+
         } else {
             GetComponent<Rigidbody2D>().AddForce( new Vector2( -playerDashPower, 0 ), ForceMode2D.Force );
             DashImpulse = -10;
+            
+            
         }
     }
 
