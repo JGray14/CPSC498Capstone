@@ -14,11 +14,13 @@ public class PlayerControl : MonoBehaviour {
     private float moveX;
 
     private Animator animator;
+    private Animation playerAnimation;
     public float speed = 1f;
 
     // Use this for initialization
     void Start () {
-        animator = this.GetComponent<Animator>();
+        animator = GetComponent<Animator>();
+        playerAnimation = GetComponent<Animation>();
 	}
 	
 	// Update is called once per frame
@@ -30,11 +32,15 @@ public class PlayerControl : MonoBehaviour {
     void PlayerMove() {
         moveX = Input.GetAxis( "Horizontal" );
         
-        //need to stop animation when player stops
-        if (moveX != 0)
-        {
-            animator.Play("PlayerWarrior_Move");
-        }
+        //we can change priority of animations in PlayerWarrior animator
+        //as well as interupts
+        //currently this complicates things as the run animation will always take over
+        //even if another animation is trying to play
+
+        //if (playerIsMoving())
+        //{
+        //    animator.Play("PlayerWarrior_Move");
+        //}
         
 
         if ( DashCooldown > 0 ) {
@@ -60,7 +66,8 @@ public class PlayerControl : MonoBehaviour {
 
 
         if ( ( Input.GetButtonDown( "Dash" ) || Input.GetAxis( "Dash (Controller)" ) == 1 ) && DashCooldown == 0 ) {
-          Dash();
+            Dash();
+            
         }
 
         if ( moveX > 0.0f && facingRight == false ) {
@@ -69,6 +76,11 @@ public class PlayerControl : MonoBehaviour {
             FlipPlayer();
         }
         gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2( moveX * playerSpeed, gameObject.GetComponent<Rigidbody2D>().velocity.y );
+
+        if (Input.GetMouseButtonDown(0))
+        {
+            Attack1();
+        }
 
     }
 
@@ -85,6 +97,7 @@ public class PlayerControl : MonoBehaviour {
 
     void Jump() {
         GetComponent<Rigidbody2D>().AddForce( Vector2.up * playerJumpPower );
+        animator.Play("PlayerWarrior_Jump");
     }
 
     void Dash() {
@@ -101,10 +114,24 @@ public class PlayerControl : MonoBehaviour {
         }
     }
 
+    void Attack1()
+    {
+        animator.Play("HeroWarrior_Attack_part1");
+    }
+
     void FlipPlayer() {
         facingRight = !facingRight;
         Vector2 localScale = gameObject.transform.localScale;
         localScale.x *= -1;
         transform.localScale = localScale;
+    }
+
+    bool playerIsMoving()
+    {
+        if (moveX != 0)
+        {
+            return true;
+        }
+        return false;
     }
 }
