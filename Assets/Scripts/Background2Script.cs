@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BackgroundScript : MonoBehaviour {
+public class Background2Script : MonoBehaviour {
 
     private GameObject camera;
     private GameObject background;
@@ -12,15 +12,15 @@ public class BackgroundScript : MonoBehaviour {
     // Use this for initialization
     void Start() {
         camera = GameObject.FindGameObjectWithTag( "MainCamera" );
-        background = GameObject.FindGameObjectWithTag( "Background" );
+        background = gameObject;
     }
 
     // Update is called once per frame
     void Update() {
-        GetComponent<Renderer>().material.mainTextureOffset = new Vector2( camera.transform.position.x/500, 0 );
+        //GetComponent<Renderer>().material.mainTextureOffset = new Vector2( camera.transform.position.x / 500, 0 );
     }
 
     void LateUpdate() {
-        background.transform.position = new Vector3( camera.transform.position.x, camera.transform.position.y, 1 );
+        background.transform.position = new Vector3( background.transform.position.x, camera.transform.position.y/2f - 30, 30f );
     }
 }
