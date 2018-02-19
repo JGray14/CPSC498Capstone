@@ -15,6 +15,7 @@ public class PlayerControl : MonoBehaviour {
     public int playerDashPower = 1000;
     private float moveX;
     public int attackLength;
+    public bool GroundTest;
 
     private Animator animator;
     private Animation playerAnimation;
@@ -81,6 +82,10 @@ public class PlayerControl : MonoBehaviour {
             Attack1();
         }
 
+        if ( DashImpulse != 0 ) {
+            animator.Play( "PlayerWarrior_Skill2" );
+        }
+
     }
     
     //funct to check if char is grounded. not done/working
@@ -90,7 +95,7 @@ public class PlayerControl : MonoBehaviour {
         float distance = 1.0f;
         RaycastHit2D hit = Physics2D.Raycast( pos, direction, distance, groundLayer );
         //Debug.DrawRay( pos, direction, Color.green );
-        return ( hit.collider != null );
+        return ( GroundTest = hit.collider != null );
 
     }
 
@@ -110,7 +115,7 @@ public class PlayerControl : MonoBehaviour {
             playerBody.AddForce( new Vector2( -playerDashPower, 0 ), ForceMode2D.Force );
             DashImpulse = -10;
         }
-        animator.Play( "HeroWarrior_Skill2" );
+        animator.Play( "PlayerWarrior_Skill2" );
     }
 
     void Attack1() {
@@ -127,5 +132,9 @@ public class PlayerControl : MonoBehaviour {
 
     bool playerIsMoving() {
         return ( moveX != 0 );
+    }
+
+    void animate( string animation ) {
+
     }
 }
