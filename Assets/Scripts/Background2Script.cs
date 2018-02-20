@@ -4,14 +4,14 @@ using UnityEngine;
 
 public class Background2Script : MonoBehaviour {
 
-    private GameObject camera;
+    private GameObject mainCamera;
     private GameObject background;
     public  float speed;
     private float pos;
 
     // Use this for initialization
     void Start() {
-        camera = GameObject.FindGameObjectWithTag( "MainCamera" );
+        mainCamera = GameObject.FindGameObjectWithTag( "MainCamera" );
         background = gameObject;
     }
 
@@ -21,6 +21,6 @@ public class Background2Script : MonoBehaviour {
     }
 
     void LateUpdate() {
-        background.transform.position = new Vector3( background.transform.position.x, camera.transform.position.y/2f - 30, 30f );
+        background.transform.position = new Vector3( background.transform.position.x, mainCamera.transform.position.y/1.6f - 32, 30f );
     }
 }

@@ -9,13 +9,15 @@ public class PlayerControl : MonoBehaviour {
     public int playerSpeed = 10;
     private bool facingRight = true;
     private int playerJumpNum = 0;
-    private int playerJumpPower = 1250;
+    private int playerJumpPower = 1500;
     public int DashCooldown = 0;
     private int DashImpulse = 0;
     public int playerDashPower = 1000;
     private float moveX;
     public int attackLength;
     public bool GroundTest;
+    private string animCall;
+    private int jumpBuffer;
 
     private Animator animator;
     private Animation playerAnimation;
@@ -34,23 +36,27 @@ public class PlayerControl : MonoBehaviour {
         PlayerMove();
     }
 
-    //we can change priority of animations in PlayerWarrior animator
-    //as well as interupts
-    //currently this complicates things as the run animation will always take over
-    //even if another animation is trying to play
     void PlayerMove() {
         moveX = Input.GetAxis( "Horizontal" );
-
+        animCall = "None";
         if ( isGrounded() == true ) {
             playerJumpNum = 0;
 
-            if ( playerIsMoving() && DashImpulse == 0 ) {
-                animator.Play( "PlayerWarrior_Move" );
-            } else {
-                animator.Play( "PlayerWarrior_Idle" );
+            if ( !playerIsMoving() && DashImpulse == 0 && attackLength == 0 && jumpBuffer == 0 ) {
+                animCall = "PlayerWarrior_Idle";
+            } else if ( DashImpulse == 0 && attackLength == 0 && jumpBuffer == 0 ) {
+                animCall = "PlayerWarrior_Move";
             }
+        } else if ( DashImpulse == 0 && attackLength == 0 ) {
+            animCall = "PlayerWarrior_Jump";
         }
 
+        if ( jumpBuffer > 0 ) {
+            jumpBuffer--;
+        }
+        if ( attackLength > 0 ) {
+            attackLength--;
+        }
         if ( DashCooldown > 0 ) {
             DashCooldown--;
         }
@@ -63,11 +69,12 @@ public class PlayerControl : MonoBehaviour {
             DashImpulse++;
         }
 
-        if ( ( Input.GetButtonDown( "Jump" ) || Input.GetButtonDown( "Jump (Controller)" ) ) && playerJumpNum < 1 ) {
+        if ( ( Input.GetButtonDown( "Jump" ) || Input.GetButtonDown( "Jump (Controller)" ) ) && playerJumpNum < 1 && attackLength == 0 ) {
             Jump();
+            jumpBuffer = 5;
         }
 
-        if ( ( Input.GetButtonDown( "Dash" ) || Input.GetAxis( "Dash (Controller)" ) == 1 ) && DashCooldown == 0 ) {
+        if ( ( Input.GetButtonDown( "Dash" ) || Input.GetAxis( "Dash (Controller)" ) == 1 ) && DashCooldown == 0 && attackLength == 0 ) {
             Dash();
         }
 
@@ -78,16 +85,18 @@ public class PlayerControl : MonoBehaviour {
         }
         playerBody.velocity = new Vector2( moveX * playerSpeed, gameObject.GetComponent<Rigidbody2D>().velocity.y );
 
-        if ( Input.GetMouseButtonDown( 0 ) ) {
+        if ( Input.GetMouseButtonDown( 0 ) && attackLength == 0 ) {
             Attack1();
+            attackLength = 35;
         }
 
-        if ( DashImpulse != 0 ) {
-            animator.Play( "PlayerWarrior_Skill2" );
+        //Priority should be handled by code order
+        //seperate method turned out to not work well
+        if ( animCall != "None" ) {
+            animator.Play( animCall );
         }
-
     }
-    
+
     //funct to check if char is grounded. not done/working
     bool isGrounded() {
         Vector2 pos = transform.position;
@@ -100,26 +109,31 @@ public class PlayerControl : MonoBehaviour {
     }
 
     void Jump() {
+        playerBody.velocity = new Vector3( playerBody.velocity.x, 0, 0 );
         playerBody.AddForce( Vector2.up * playerJumpPower );
-        animator.Play( "PlayerWarrior_Jump" );
+        animCall = "PlayerWarrior_Jump";
         playerJumpNum++;
     }
 
     void Dash() {
+        //Shouldn't be able to dash mid-attack
+        //if ( prevAnimation == "HeroWarrior_Attack_part3" ) {
+        //    return;
+        //}
+
         DashCooldown = 50;
         if ( facingRight ) {
             playerBody.AddForce( new Vector2( playerDashPower, 0 ), ForceMode2D.Force );
-            DashImpulse = 10;
-
+            DashImpulse = 18;
         } else {
             playerBody.AddForce( new Vector2( -playerDashPower, 0 ), ForceMode2D.Force );
-            DashImpulse = -10;
+            DashImpulse = -18;
         }
-        animator.Play( "PlayerWarrior_Skill2" );
+        animCall = "PlayerWarrior_Skill2";
     }
 
     void Attack1() {
-        animator.Play( "HeroWarrior_Attack_part3" );
+        animCall = "HeroWarrior_Attack_part3";
         attackLength = 20;
     }
 
@@ -131,10 +145,9 @@ public class PlayerControl : MonoBehaviour {
     }
 
     bool playerIsMoving() {
+        if ( playerJumpNum > 0 ) {
+            return ( true );
+        }
         return ( moveX != 0 );
-    }
-
-    void animate( string animation ) {
-
     }
 }
