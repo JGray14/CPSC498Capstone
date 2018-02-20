@@ -6,22 +6,25 @@ public class PlayerControl : MonoBehaviour {
 
     private Rigidbody2D playerBody;
     private LayerMask groundLayer;
-    public int playerSpeed = 10;
+    public  int playerSpeed = 10;
     private bool facingRight = true;
     private int playerJumpNum = 0;
-    private int playerJumpPower = 1500;
-    public int DashCooldown = 0;
-    private int DashImpulse = 0;
-    public int playerDashPower = 1000;
-    private float moveX;
-    public int attackLength;
-    public bool GroundTest;
-    private string animCall;
     private int jumpBuffer;
+    private int playerJumpPower = 1500;
+    public  int DashCooldown = 0;
+    private int DashImpulse = 0;
+    public  int playerDashPower = 1000;
+    private float moveX;
+    public  int attack1Length;
+    public  int attack2Length;
+    public  bool GroundTest;
+    private string animCall;
 
     private Animator animator;
     private Animation playerAnimation;
-    public float speed = 1f;
+    public  float speed = 1f;
+    public  GameObject swordwaveRightPrefab;
+    public  GameObject swordwaveLeftPrefab;
 
     // Use this for initialization
     void Start() {
@@ -42,20 +45,23 @@ public class PlayerControl : MonoBehaviour {
         if ( isGrounded() == true ) {
             playerJumpNum = 0;
 
-            if ( !playerIsMoving() && DashImpulse == 0 && attackLength == 0 && jumpBuffer == 0 ) {
+            if ( !playerIsMoving() && DashImpulse == 0 && attack1Length == 0 && attack2Length == 0 && jumpBuffer == 0 ) {
                 animCall = "PlayerWarrior_Idle";
-            } else if ( DashImpulse == 0 && attackLength == 0 && jumpBuffer == 0 ) {
+            } else if ( DashImpulse == 0 && attack1Length == 0 && attack2Length == 0 && jumpBuffer == 0 ) {
                 animCall = "PlayerWarrior_Move";
             }
-        } else if ( DashImpulse == 0 && attackLength == 0 ) {
+        } else if ( DashImpulse == 0 && attack1Length == 0 && attack2Length == 0 ) {
             animCall = "PlayerWarrior_Jump";
         }
 
         if ( jumpBuffer > 0 ) {
             jumpBuffer--;
         }
-        if ( attackLength > 0 ) {
-            attackLength--;
+        if ( attack1Length > 0 ) {
+            attack1Length--;
+        }
+        if ( attack2Length > 0 ) {
+            attack2Length--;
         }
         if ( DashCooldown > 0 ) {
             DashCooldown--;
@@ -69,12 +75,12 @@ public class PlayerControl : MonoBehaviour {
             DashImpulse++;
         }
 
-        if ( ( Input.GetButtonDown( "Jump" ) || Input.GetButtonDown( "Jump (Controller)" ) ) && playerJumpNum < 1 && attackLength == 0 ) {
+        if ( ( Input.GetButtonDown( "Jump" ) ) && playerJumpNum < 1 && attack1Length == 0 && attack2Length == 0 ) {
             Jump();
             jumpBuffer = 5;
         }
 
-        if ( ( Input.GetButtonDown( "Dash" ) || Input.GetAxis( "Dash (Controller)" ) == 1 ) && DashCooldown == 0 && attackLength == 0 ) {
+        if ( ( Input.GetButtonDown( "Dash" ) || Input.GetAxis( "Dash (Controller)" ) == 1 ) && DashCooldown == 0 && attack1Length == 0 && attack2Length == 0 ) {
             Dash();
         }
 
@@ -85,9 +91,16 @@ public class PlayerControl : MonoBehaviour {
         }
         playerBody.velocity = new Vector2( moveX * playerSpeed, gameObject.GetComponent<Rigidbody2D>().velocity.y );
 
-        if ( Input.GetMouseButtonDown( 0 ) && attackLength == 0 ) {
+        if ( Input.GetButtonDown( "Attack2" ) && attack2Length == 0 ) {
+            //Attack2();
+            animCall = "HeroWarrior_Attack_part1";
+            Invoke( "Attack2", .35f );
+            attack2Length = 30;
+        }
+
+        if ( Input.GetButtonDown( "Attack1" ) && attack1Length == 0 ) {
             Attack1();
-            attackLength = 35;
+            attack1Length = 35;
         }
 
         //Priority should be handled by code order
@@ -116,10 +129,6 @@ public class PlayerControl : MonoBehaviour {
     }
 
     void Dash() {
-        //Shouldn't be able to dash mid-attack
-        //if ( prevAnimation == "HeroWarrior_Attack_part3" ) {
-        //    return;
-        //}
 
         DashCooldown = 50;
         if ( facingRight ) {
@@ -134,7 +143,18 @@ public class PlayerControl : MonoBehaviour {
 
     void Attack1() {
         animCall = "HeroWarrior_Attack_part3";
-        attackLength = 20;
+    }
+
+    void Attack2() {
+        if ( facingRight ) {
+            Vector2 pos = new Vector2( playerBody.transform.position.x + .3f, playerBody.transform.position.y + .8f );
+            GameObject bullet = (GameObject)Instantiate( swordwaveRightPrefab, pos, Quaternion.identity );
+            bullet.AddComponent<WaveRight>();
+        } else {
+            Vector2 pos = new Vector2( playerBody.transform.position.x - .3f, playerBody.transform.position.y + .8f );
+            GameObject bullet = (GameObject)Instantiate( swordwaveLeftPrefab, pos, Quaternion.identity );
+            bullet.AddComponent<WaveLeft>();
+        }
     }
 
     void FlipPlayer() {
