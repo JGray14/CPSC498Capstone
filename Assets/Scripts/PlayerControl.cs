@@ -112,7 +112,7 @@ public class PlayerControl : MonoBehaviour {
         }
     }
 
-    //funct to check if char is grounded. not done/working
+    
     bool isGrounded() {
         Vector2 pos = transform.position;
         Vector2 direction = Vector2.down;
