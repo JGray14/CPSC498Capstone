@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerControl : MonoBehaviour {
 
@@ -21,8 +22,7 @@ public class PlayerControl : MonoBehaviour {
     private string animCall;
 
     private Animator animator;
-    private Animation playerAnimation;
-    public  float speed = 1f;
+    //public  float speed = 1f;
     public  GameObject swordwaveRightPrefab;
     public  GameObject swordwaveLeftPrefab;
 
@@ -30,7 +30,6 @@ public class PlayerControl : MonoBehaviour {
     void Start() {
         playerBody = gameObject.GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
-        playerAnimation = GetComponent<Animation>();
         groundLayer = LayerMask.GetMask( "Ground" );
     }
 
@@ -43,7 +42,7 @@ public class PlayerControl : MonoBehaviour {
         moveX = Input.GetAxis( "Horizontal" );
         animCall = "None";
         if ( playerBody.position.y < -20 ) {
-            Application.LoadLevel( Application.loadedLevel );
+            SceneManager.LoadScene( "Testing" );
         }
         if ( isGrounded() == true ) {
             playerJumpNum = 0;
