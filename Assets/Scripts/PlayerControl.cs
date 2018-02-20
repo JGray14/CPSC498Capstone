@@ -42,6 +42,9 @@ public class PlayerControl : MonoBehaviour {
     void PlayerMove() {
         moveX = Input.GetAxis( "Horizontal" );
         animCall = "None";
+        if ( playerBody.position.y < -20 ) {
+            Application.LoadLevel( Application.loadedLevel );
+        }
         if ( isGrounded() == true ) {
             playerJumpNum = 0;
 
@@ -91,14 +94,14 @@ public class PlayerControl : MonoBehaviour {
         }
         playerBody.velocity = new Vector2( moveX * playerSpeed, gameObject.GetComponent<Rigidbody2D>().velocity.y );
 
-        if ( Input.GetButtonDown( "Attack2" ) && attack2Length == 0 ) {
+        if ( ( Input.GetButtonDown( "Attack2" ) || Input.GetAxis( "Attack2" ) == 1 ) && attack2Length == 0 && attack1Length == 0 ) {
             //Attack2();
             animCall = "HeroWarrior_Attack_part1";
             Invoke( "Attack2", .35f );
             attack2Length = 30;
         }
 
-        if ( Input.GetButtonDown( "Attack1" ) && attack1Length == 0 ) {
+        if ( Input.GetButtonDown( "Attack1" ) && attack1Length == 0 && attack2Length == 0 ) {
             Attack1();
             attack1Length = 35;
         }
