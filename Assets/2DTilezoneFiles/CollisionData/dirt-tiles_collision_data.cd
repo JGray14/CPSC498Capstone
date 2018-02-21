@@ -69,8 +69,8 @@
   <collisions>None</collisions>
   <collisions>None</collisions>
   <collisions>None</collisions>
-  <collisions>None</collisions>
-  <collisions>None</collisions>
+  <collisions>Full</collisions>
+  <collisions>Full</collisions>
   <collisions>None</collisions>
   <collisions>Full</collisions>
   <collisions>Full</collisions>
@@ -104,14 +104,14 @@
   <collisions>Full</collisions>
   <collisions>Full</collisions>
   <collisions>Full</collisions>
-  <collisions>SlopeUpRight</collisions>
-  <collisions>SlopeUpRight</collisions>
-  <collisions>Full</collisions>
-  <collisions>Full</collisions>
-  <collisions>Full</collisions>
-  <collisions>Full</collisions>
-  <collisions>Full</collisions>
-  <collisions>Full</collisions>
+  <collisions>None</collisions>
+  <collisions>None</collisions>
+  <collisions>None</collisions>
+  <collisions>None</collisions>
+  <collisions>None</collisions>
+  <collisions>None</collisions>
+  <collisions>None</collisions>
+  <collisions>None</collisions>
   <collisions>None</collisions>
   <collisions>None</collisions>
   <collisions>None</collisions>
@@ -128,14 +128,14 @@
   <collisions>Full</collisions>
   <collisions>Full</collisions>
   <collisions>Full</collisions>
-  <collisions>Full</collisions>
-  <collisions>Full</collisions>
-  <collisions>Full</collisions>
-  <collisions>Full</collisions>
-  <collisions>Full</collisions>
-  <collisions>Full</collisions>
-  <collisions>Full</collisions>
-  <collisions>Full</collisions>
+  <collisions>None</collisions>
+  <collisions>None</collisions>
+  <collisions>None</collisions>
+  <collisions>None</collisions>
+  <collisions>None</collisions>
+  <collisions>None</collisions>
+  <collisions>None</collisions>
+  <collisions>None</collisions>
   <collisions>None</collisions>
   <collisions>None</collisions>
   <collisions>None</collisions>
@@ -152,6 +152,22 @@
   <collisions>Full</collisions>
   <collisions>Full</collisions>
   <collisions>Full</collisions>
+  <collisions>None</collisions>
+  <collisions>None</collisions>
+  <collisions>None</collisions>
+  <collisions>None</collisions>
+  <collisions>None</collisions>
+  <collisions>None</collisions>
+  <collisions>None</collisions>
+  <collisions>None</collisions>
+  <collisions>None</collisions>
+  <collisions>None</collisions>
+  <collisions>None</collisions>
+  <collisions>None</collisions>
+  <collisions>None</collisions>
+  <collisions>None</collisions>
+  <collisions>None</collisions>
+  <collisions>None</collisions>
   <collisions>Full</collisions>
   <collisions>Full</collisions>
   <collisions>Full</collisions>
@@ -168,6 +184,34 @@
   <collisions>None</collisions>
   <collisions>None</collisions>
   <collisions>None</collisions>
+  <collisions>None</collisions>
+  <collisions>None</collisions>
+  <collisions>None</collisions>
+  <collisions>None</collisions>
+  <collisions>None</collisions>
+  <collisions>None</collisions>
+  <collisions>None</collisions>
+  <collisions>None</collisions>
+  <collisions>Full</collisions>
+  <collisions>Full</collisions>
+  <collisions>Full</collisions>
+  <collisions>Full</collisions>
+  <collisions>Full</collisions>
+  <collisions>Full</collisions>
+  <collisions>None</collisions>
+  <collisions>None</collisions>
+  <collisions>Full</collisions>
+  <collisions>Full</collisions>
+  <collisions>Full</collisions>
+  <collisions>Full</collisions>
+  <collisions>Full</collisions>
+  <collisions>Full</collisions>
+  <collisions>Full</collisions>
+  <collisions>Full</collisions>
+  <collisions>None</collisions>
+  <collisions>None</collisions>
+  <collisions>None</collisions>
+  <collisions>Full</collisions>
   <collisions>Full</collisions>
   <collisions>Full</collisions>
   <collisions>Full</collisions>
@@ -179,51 +223,7 @@
   <collisions>Full</collisions>
   <collisions>Full</collisions>
   <collisions>SlopeUpRight</collisions>
-  <collisions>Full</collisions>
-  <collisions>None</collisions>
-  <collisions>Full</collisions>
-  <collisions>Full</collisions>
-  <collisions>Full</collisions>
-  <collisions>None</collisions>
-  <collisions>None</collisions>
-  <collisions>None</collisions>
-  <collisions>None</collisions>
-  <collisions>None</collisions>
-  <collisions>None</collisions>
-  <collisions>None</collisions>
-  <collisions>None</collisions>
-  <collisions>Full</collisions>
-  <collisions>Full</collisions>
-  <collisions>Full</collisions>
-  <collisions>Full</collisions>
-  <collisions>Full</collisions>
-  <collisions>Full</collisions>
-  <collisions>Full</collisions>
-  <collisions>Full</collisions>
-  <collisions>Full</collisions>
-  <collisions>Full</collisions>
-  <collisions>Full</collisions>
-  <collisions>Full</collisions>
-  <collisions>Full</collisions>
-  <collisions>Full</collisions>
-  <collisions>Full</collisions>
-  <collisions>Full</collisions>
-  <collisions>None</collisions>
-  <collisions>None</collisions>
-  <collisions>None</collisions>
-  <collisions>Full</collisions>
-  <collisions>Full</collisions>
-  <collisions>Full</collisions>
-  <collisions>Full</collisions>
-  <collisions>Full</collisions>
-  <collisions>Full</collisions>
-  <collisions>Full</collisions>
-  <collisions>Full</collisions>
-  <collisions>Full</collisions>
-  <collisions>Full</collisions>
-  <collisions>Full</collisions>
-  <collisions>Full</collisions>
-  <collisions>Full</collisions>
+  <collisions>SlopeUpLeft</collisions>
   <collisions>Full</collisions>
   <collisions>Full</collisions>
   <collisions>Full</collisions>
@@ -363,7 +363,7 @@
   <collisions>Full</collisions>
   <collisions>Full</collisions>
   <collisions>SlopeUpRight</collisions>
-  <collisions>Platform</collisions>
+  <collisions>None</collisions>
   <collisions>Full</collisions>
   <collisions>Full</collisions>
   <collisions>Full</collisions>
