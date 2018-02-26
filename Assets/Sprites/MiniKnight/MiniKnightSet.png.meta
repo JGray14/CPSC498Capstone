@@ -1,9 +1,84 @@
 fileFormatVersion: 2
 guid: 63cc23bab2980f74fb54fbc95c07e243
-timeCreated: 1519686289
+timeCreated: 1519686884
 licenseType: Free
 TextureImporter:
-  fileIDToRecycleName: {}
+  fileIDToRecycleName:
+    21300000: MiniKnightSet_0
+    21300002: MiniKnightSet_1
+    21300004: MiniKnightSet_2
+    21300006: MiniKnightSet_3
+    21300008: MiniKnightSet_4
+    21300010: MiniKnightSet_5
+    21300012: MiniKnightSet_6
+    21300014: MiniKnightSet_7
+    21300016: MiniKnightSet_8
+    21300018: MiniKnightSet_9
+    21300020: MiniKnightSet_10
+    21300022: MiniKnightSet_11
+    21300024: MiniKnightSet_12
+    21300026: MiniKnightSet_13
+    21300028: MiniKnightSet_14
+    21300030: MiniKnightSet_15
+    21300032: MiniKnightSet_16
+    21300034: MiniKnightSet_17
+    21300036: MiniKnightSet_18
+    21300038: MiniKnightSet_19
+    21300040: MiniKnightSet_20
+    21300042: MiniKnightSet_21
+    21300044: MiniKnightSet_22
+    21300046: MiniKnightSet_23
+    21300048: MiniKnightSet_24
+    21300050: MiniKnightSet_25
+    21300052: MiniKnightSet_26
+    21300054: MiniKnightSet_27
+    21300056: MiniKnightSet_28
+    21300058: MiniKnightSet_29
+    21300060: MiniKnightSet_30
+    21300062: MiniKnightSet_31
+    21300064: MiniKnightSet_32
+    21300066: MiniKnightSet_33
+    21300068: MiniKnightSet_34
+    21300070: MiniKnightSet_35
+    21300072: MiniKnightSet_36
+    21300074: MiniKnightSet_37
+    21300076: MiniKnightSet_38
+    21300078: MiniKnightSet_39
+    21300080: MiniKnightSet_40
+    21300082: MiniKnightSet_41
+    21300084: MiniKnightSet_42
+    21300086: MiniKnightSet_43
+    21300088: MiniKnightSet_44
+    21300090: MiniKnightSet_45
+    21300092: MiniKnightSet_46
+    21300094: MiniKnightSet_47
+    21300096: MiniKnightSet_48
+    21300098: MiniKnightSet_49
+    21300100: MiniKnightSet_50
+    21300102: MiniKnightSet_51
+    21300104: MiniKnightSet_52
+    21300106: MiniKnightSet_53
+    21300108: MiniKnightSet_54
+    21300110: MiniKnightSet_55
+    21300112: MiniKnightSet_56
+    21300114: MiniKnightSet_57
+    21300116: MiniKnightSet_58
+    21300118: MiniKnightSet_59
+    21300120: MiniKnightSet_60
+    21300122: MiniKnightSet_61
+    21300124: MiniKnightSet_62
+    21300126: MiniKnightSet_63
+    21300128: MiniKnightSet_64
+    21300130: MiniKnightSet_65
+    21300132: MiniKnightSet_66
+    21300134: MiniKnightSet_67
+    21300136: MiniKnightSet_68
+    21300138: MiniKnightSet_69
+    21300140: MiniKnightSet_70
+    21300142: MiniKnightSet_71
+    21300144: MiniKnightSet_72
+    21300146: MiniKnightSet_73
+    21300148: MiniKnightSet_74
   externalObjects: {}
   serializedVersion: 4
   mipmaps:
@@ -31,7 +106,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: -1
+    filterMode: 0
     aniso: -1
     mipBias: -1
     wrapU: 1
@@ -40,7 +115,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -66,9 +141,887 @@ TextureImporter:
     allowsAlphaSplitting: 0
     overridden: 0
     androidETC2FallbackOverride: 0
+  - buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: MiniKnightSet_0
+      rect:
+        serializedVersion: 2
+        x: 28
+        y: 463
+        width: 14
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: MiniKnightSet_1
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 463
+        width: 14
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: MiniKnightSet_2
+      rect:
+        serializedVersion: 2
+        x: 193
+        y: 463
+        width: 15
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: MiniKnightSet_3
+      rect:
+        serializedVersion: 2
+        x: 229
+        y: 463
+        width: 15
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: MiniKnightSet_4
+      rect:
+        serializedVersion: 2
+        x: 264
+        y: 463
+        width: 15
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: MiniKnightSet_5
+      rect:
+        serializedVersion: 2
+        x: 300
+        y: 463
+        width: 15
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: MiniKnightSet_6
+      rect:
+        serializedVersion: 2
+        x: 28
+        y: 401
+        width: 14
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: MiniKnightSet_7
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 401
+        width: 13
+        height: 17
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: MiniKnightSet_8
+      rect:
+        serializedVersion: 2
+        x: 100
+        y: 401
+        width: 12
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: MiniKnightSet_9
+      rect:
+        serializedVersion: 2
+        x: 136
+        y: 401
+        width: 13
+        height: 17
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: MiniKnightSet_10
+      rect:
+        serializedVersion: 2
+        x: 193
+        y: 401
+        width: 15
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: MiniKnightSet_11
+      rect:
+        serializedVersion: 2
+        x: 229
+        y: 401
+        width: 15
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: MiniKnightSet_12
+      rect:
+        serializedVersion: 2
+        x: 266
+        y: 401
+        width: 15
+        height: 15
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: MiniKnightSet_13
+      rect:
+        serializedVersion: 2
+        x: 300
+        y: 401
+        width: 19
+        height: 13
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: MiniKnightSet_14
+      rect:
+        serializedVersion: 2
+        x: 336
+        y: 401
+        width: 17
+        height: 5
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: MiniKnightSet_15
+      rect:
+        serializedVersion: 2
+        x: 28
+        y: 365
+        width: 14
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: MiniKnightSet_16
+      rect:
+        serializedVersion: 2
+        x: 65
+        y: 365
+        width: 13
+        height: 17
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: MiniKnightSet_17
+      rect:
+        serializedVersion: 2
+        x: 102
+        y: 365
+        width: 12
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: MiniKnightSet_18
+      rect:
+        serializedVersion: 2
+        x: 137
+        y: 365
+        width: 13
+        height: 17
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: MiniKnightSet_19
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 365
+        width: 15
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: MiniKnightSet_20
+      rect:
+        serializedVersion: 2
+        x: 228
+        y: 365
+        width: 15
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: MiniKnightSet_21
+      rect:
+        serializedVersion: 2
+        x: 263
+        y: 365
+        width: 15
+        height: 15
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: MiniKnightSet_22
+      rect:
+        serializedVersion: 2
+        x: 297
+        y: 365
+        width: 19
+        height: 13
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: MiniKnightSet_23
+      rect:
+        serializedVersion: 2
+        x: 335
+        y: 365
+        width: 17
+        height: 5
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: MiniKnightSet_24
+      rect:
+        serializedVersion: 2
+        x: 28
+        y: 305
+        width: 14
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: MiniKnightSet_25
+      rect:
+        serializedVersion: 2
+        x: 57
+        y: 305
+        width: 21
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: MiniKnightSet_26
+      rect:
+        serializedVersion: 2
+        x: 100
+        y: 305
+        width: 14
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: MiniKnightSet_27
+      rect:
+        serializedVersion: 2
+        x: 136
+        y: 305
+        width: 21
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: MiniKnightSet_28
+      rect:
+        serializedVersion: 2
+        x: 194
+        y: 305
+        width: 10
+        height: 17
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: MiniKnightSet_29
+      rect:
+        serializedVersion: 2
+        x: 232
+        y: 305
+        width: 10
+        height: 17
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: MiniKnightSet_30
+      rect:
+        serializedVersion: 2
+        x: 28
+        y: 208
+        width: 14
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: MiniKnightSet_31
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 208
+        width: 14
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: MiniKnightSet_32
+      rect:
+        serializedVersion: 2
+        x: 193
+        y: 208
+        width: 15
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: MiniKnightSet_33
+      rect:
+        serializedVersion: 2
+        x: 229
+        y: 208
+        width: 15
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: MiniKnightSet_34
+      rect:
+        serializedVersion: 2
+        x: 264
+        y: 208
+        width: 15
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: MiniKnightSet_35
+      rect:
+        serializedVersion: 2
+        x: 300
+        y: 208
+        width: 15
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: MiniKnightSet_36
+      rect:
+        serializedVersion: 2
+        x: 28
+        y: 146
+        width: 14
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: MiniKnightSet_37
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 146
+        width: 13
+        height: 17
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: MiniKnightSet_38
+      rect:
+        serializedVersion: 2
+        x: 100
+        y: 146
+        width: 12
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: MiniKnightSet_39
+      rect:
+        serializedVersion: 2
+        x: 136
+        y: 146
+        width: 13
+        height: 17
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: MiniKnightSet_40
+      rect:
+        serializedVersion: 2
+        x: 193
+        y: 146
+        width: 15
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: MiniKnightSet_41
+      rect:
+        serializedVersion: 2
+        x: 229
+        y: 146
+        width: 15
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: MiniKnightSet_42
+      rect:
+        serializedVersion: 2
+        x: 266
+        y: 146
+        width: 15
+        height: 15
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: MiniKnightSet_43
+      rect:
+        serializedVersion: 2
+        x: 300
+        y: 146
+        width: 19
+        height: 13
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: MiniKnightSet_44
+      rect:
+        serializedVersion: 2
+        x: 336
+        y: 146
+        width: 17
+        height: 5
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: MiniKnightSet_45
+      rect:
+        serializedVersion: 2
+        x: 28
+        y: 110
+        width: 14
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: MiniKnightSet_46
+      rect:
+        serializedVersion: 2
+        x: 65
+        y: 110
+        width: 13
+        height: 17
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: MiniKnightSet_47
+      rect:
+        serializedVersion: 2
+        x: 102
+        y: 110
+        width: 12
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: MiniKnightSet_48
+      rect:
+        serializedVersion: 2
+        x: 137
+        y: 110
+        width: 13
+        height: 17
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: MiniKnightSet_49
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 110
+        width: 15
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: MiniKnightSet_50
+      rect:
+        serializedVersion: 2
+        x: 228
+        y: 110
+        width: 15
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: MiniKnightSet_51
+      rect:
+        serializedVersion: 2
+        x: 263
+        y: 110
+        width: 15
+        height: 15
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: MiniKnightSet_52
+      rect:
+        serializedVersion: 2
+        x: 297
+        y: 110
+        width: 19
+        height: 13
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: MiniKnightSet_53
+      rect:
+        serializedVersion: 2
+        x: 335
+        y: 110
+        width: 17
+        height: 5
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: MiniKnightSet_54
+      rect:
+        serializedVersion: 2
+        x: 28
+        y: 50
+        width: 14
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: MiniKnightSet_55
+      rect:
+        serializedVersion: 2
+        x: 57
+        y: 50
+        width: 21
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: MiniKnightSet_56
+      rect:
+        serializedVersion: 2
+        x: 100
+        y: 50
+        width: 14
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: MiniKnightSet_57
+      rect:
+        serializedVersion: 2
+        x: 136
+        y: 50
+        width: 21
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: MiniKnightSet_58
+      rect:
+        serializedVersion: 2
+        x: 194
+        y: 50
+        width: 10
+        height: 17
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: MiniKnightSet_59
+      rect:
+        serializedVersion: 2
+        x: 232
+        y: 50
+        width: 10
+        height: 17
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: MiniKnightSet_73
+      rect:
+        serializedVersion: 2
+        x: 154
+        y: 16
+        width: 12
+        height: 9
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: MiniKnightSet_74
+      rect:
+        serializedVersion: 2
+        x: 180
+        y: 16
+        width: 12
+        height: 9
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
     outline: []
     physicsShape: []
   spritePackingTag: 
