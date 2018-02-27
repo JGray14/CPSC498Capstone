@@ -22,7 +22,7 @@ public class WaveLeft : MonoBehaviour {
             DestroyObject( gameObject );
         }
         if ( !triggered ) {
-            gameObject.GetComponent<Rigidbody2D>().AddForce( Vector2.left * 1000 );
+            gameObject.GetComponent<Rigidbody2D>().AddForce( Vector2.left * 1200 );
             triggered = true;
         }
         //transform.position = new Vector2( x - .2f, y );
