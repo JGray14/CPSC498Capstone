@@ -39,6 +39,9 @@ public class PlayerControl : MonoBehaviour {
     }
 
     void PlayerMove() {
+        if ( Input.GetButtonDown( "Cancel" ) ) {
+            Application.Quit();
+        }
         moveX = Input.GetAxis( "Horizontal" );
         animCall = "None";
         if ( playerBody.position.y < -20 ) {

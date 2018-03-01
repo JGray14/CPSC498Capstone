@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: b1640351f8a892344ac4b54688e1ccb2
-timeCreated: 1519692921
+timeCreated: 1519865099
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -155,8 +155,8 @@ TextureImporter:
       name: JnRTiles_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 16
+        x: 201
+        y: 0
         width: 16
         height: 16
       alignment: 0
@@ -665,8 +665,7 @@ TextureImporter:
       physicsShape:
       - - {x: -8, y: 8}
         - {x: -8, y: -8}
-        - {x: 7, y: -8}
-        - {x: 8, y: -7}
+        - {x: 8, y: -8}
         - {x: 8, y: 8}
       tessellationDetail: 0
     - serializedVersion: 2
@@ -1096,7 +1095,7 @@ TextureImporter:
       physicsShape:
       - - {x: -8, y: 8}
         - {x: -8, y: 2}
-        - {x: -5, y: 2}
+        - {x: -8, y: -8}
         - {x: -5, y: -8}
         - {x: 8, y: -8}
         - {x: 8, y: 8}
@@ -1250,7 +1249,7 @@ TextureImporter:
       physicsShape:
       - - {x: -8, y: 8}
         - {x: -8, y: -4}
-        - {x: 2, y: -4}
+        - {x: -8, y: -8}
         - {x: 2, y: -8}
         - {x: 8, y: -8}
         - {x: 8, y: 8}
@@ -1343,8 +1342,7 @@ TextureImporter:
       - - {x: -8, y: 8}
         - {x: -8, y: -8}
         - {x: 8, y: -8}
-        - {x: 8, y: 6}
-        - {x: 7, y: 8}
+        - {x: 8, y: 8}
       tessellationDetail: 0
     - serializedVersion: 2
       name: JnRTiles_64
