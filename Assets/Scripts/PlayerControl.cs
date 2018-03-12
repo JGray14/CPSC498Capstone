@@ -20,6 +20,10 @@ public class PlayerControl : MonoBehaviour {
     public  int attack2Length;
     public  bool GroundTest;
     private string animCall;
+    private Color normalColor;
+    private Color dashColor;
+    private Color hitColor;
+    private Color healColor;
 
     private Animator animator;
     //public  float speed = 1f;
@@ -31,6 +35,10 @@ public class PlayerControl : MonoBehaviour {
         playerBody = gameObject.GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         groundLayer = LayerMask.GetMask( "Ground" );
+        normalColor = GetComponent<Renderer>().material.color;
+        dashColor = Color.cyan;
+        hitColor = Color.red;
+        healColor = Color.green;
     }
 
     // Update is called once per frame
@@ -40,10 +48,14 @@ public class PlayerControl : MonoBehaviour {
 
     void PlayerMove() {
         if ( Input.GetButtonDown( "Cancel" ) ) {
+            //Bring up escape menu here
             Application.Quit();
         }
         moveX = Input.GetAxis( "Horizontal" );
         animCall = "None";
+        if ( DashCooldown == 1 ) {
+            StartCoroutine( DashReset() );
+        }
         if ( playerBody.position.y < -20 ) {
             SceneManager.LoadScene( "Testing" );
         }
@@ -115,7 +127,28 @@ public class PlayerControl : MonoBehaviour {
         }
     }
 
-    
+    IEnumerator DashReset() {
+        GetComponent<Renderer>().material.color = dashColor;
+        yield return new WaitForSeconds( .1f );
+        GetComponent<Renderer>().material.color = normalColor;
+        yield return new WaitForSeconds( .1f );
+    }
+
+    IEnumerator Hit() {
+        GetComponent<Renderer>().material.color = hitColor;
+        yield return new WaitForSeconds( .1f );
+        GetComponent<Renderer>().material.color = normalColor;
+        yield return new WaitForSeconds( .1f );
+    }
+
+    IEnumerator Heal() {
+        GetComponent<Renderer>().material.color = healColor;
+        yield return new WaitForSeconds( .1f );
+        GetComponent<Renderer>().material.color = normalColor;
+        yield return new WaitForSeconds( .1f );
+    }
+
+
     bool isGrounded() {
         Vector2 pos = transform.position;
         Vector2 direction = Vector2.down;
