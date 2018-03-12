@@ -7,6 +7,7 @@ public class PlayerControl : MonoBehaviour {
 
     private Rigidbody2D playerBody;
     private LayerMask groundLayer;
+    public int playerHealth;
     public  int playerSpeed = 10;
     private bool facingRight = true;
     private int playerJumpNum = 0;
@@ -33,6 +34,7 @@ public class PlayerControl : MonoBehaviour {
     // Use this for initialization
     void Start() {
         playerBody = gameObject.GetComponent<Rigidbody2D>();
+        playerHealth = 6;
         animator = GetComponent<Animator>();
         groundLayer = LayerMask.GetMask( "Ground" );
         normalColor = GetComponent<Renderer>().material.color;
@@ -47,6 +49,10 @@ public class PlayerControl : MonoBehaviour {
     }
 
     void PlayerMove() {
+        if ( playerHealth == 0 ) {
+            //GameOver();
+        }
+        //setHealth();
         if ( Input.GetButtonDown( "Cancel" ) ) {
             //Bring up escape menu here
             Application.Quit();
@@ -56,6 +62,7 @@ public class PlayerControl : MonoBehaviour {
         if ( DashCooldown == 1 ) {
             StartCoroutine( DashReset() );
         }
+        //Reset incase escape from map borders
         if ( playerBody.position.y < -20 ) {
             SceneManager.LoadScene( "Testing" );
         }
