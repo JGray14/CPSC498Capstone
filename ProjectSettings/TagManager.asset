@@ -5,7 +5,6 @@ TagManager:
   serializedVersion: 2
   tags:
   - Background
-  - Hearts
   layers:
   - Default
   - TransparentFX
