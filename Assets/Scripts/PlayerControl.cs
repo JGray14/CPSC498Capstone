@@ -193,10 +193,10 @@ public class PlayerControl : MonoBehaviour {
     void Attack2() {
         if ( facingRight ) {
             Vector2 pos = new Vector2( playerBody.transform.position.x + .3f, playerBody.transform.position.y + .8f );
-            GameObject bullet = (GameObject)Instantiate( swordwaveRightPrefab, pos, Quaternion.identity );
+            Instantiate( swordwaveRightPrefab, pos, Quaternion.identity );
         } else {
             Vector2 pos = new Vector2( playerBody.transform.position.x - .3f, playerBody.transform.position.y + .8f );
-            GameObject bullet = (GameObject)Instantiate( swordwaveLeftPrefab, pos, Quaternion.identity );
+            Instantiate( swordwaveLeftPrefab, pos, Quaternion.identity );
         }
     }
 
