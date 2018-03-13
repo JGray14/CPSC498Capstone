@@ -1,7 +1,9 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class PlayerControl : MonoBehaviour {
 
@@ -30,6 +32,8 @@ public class PlayerControl : MonoBehaviour {
     //public  float speed = 1f;
     public  GameObject swordwaveRightPrefab;
     public  GameObject swordwaveLeftPrefab;
+    public GameObject Hearts;
+    private int tempint;
 
     // Use this for initialization
     void Start() {
@@ -41,6 +45,7 @@ public class PlayerControl : MonoBehaviour {
         dashColor = Color.cyan;
         hitColor = Color.red;
         healColor = Color.green;
+        tempint = 600;
     }
 
     // Update is called once per frame
@@ -51,8 +56,15 @@ public class PlayerControl : MonoBehaviour {
     void PlayerMove() {
         if ( playerHealth == 0 ) {
             //GameOver();
+            //temp
+            playerHealth = 6;
+            tempint = 600;
+            //temp
         }
-        //setHealth();
+
+        playerHealth = tempint/60;
+        tempint--;
+
         if ( Input.GetButtonDown( "Cancel" ) ) {
             //Bring up escape menu here
             Application.Quit();
@@ -134,14 +146,14 @@ public class PlayerControl : MonoBehaviour {
         }
     }
 
-    IEnumerator DashReset() {
+    private IEnumerator DashReset() {
         GetComponent<Renderer>().material.color = dashColor;
         yield return new WaitForSeconds( .1f );
         GetComponent<Renderer>().material.color = normalColor;
         yield return new WaitForSeconds( .1f );
     }
 
-    IEnumerator Hit() {
+    private IEnumerator Hit() {
         GetComponent<Renderer>().material.color = hitColor;
         yield return new WaitForSeconds( .1f );
         GetComponent<Renderer>().material.color = normalColor;
@@ -156,7 +168,7 @@ public class PlayerControl : MonoBehaviour {
     }
 
 
-    bool isGrounded() {
+    private bool isGrounded() {
         Vector2 pos = transform.position;
         Vector2 direction = Vector2.down;
         float distance = 1.0f;
@@ -166,14 +178,14 @@ public class PlayerControl : MonoBehaviour {
 
     }
 
-    void Jump() {
+    private void Jump() {
         playerBody.velocity = new Vector3( playerBody.velocity.x, 0, 0 );
         playerBody.AddForce( Vector2.up * playerJumpPower );
         animCall = "PlayerWarrior_Jump";
         playerJumpNum++;
     }
 
-    void Dash() {
+    private void Dash() {
 
         DashCooldown = 50;
         if ( facingRight ) {
@@ -186,11 +198,11 @@ public class PlayerControl : MonoBehaviour {
         animCall = "PlayerWarrior_Skill2";
     }
 
-    void Attack1() {
+    private void Attack1() {
         animCall = "HeroWarrior_Attack_part3";
     }
 
-    void Attack2() {
+    private void Attack2() {
         if ( facingRight ) {
             Vector2 pos = new Vector2( playerBody.transform.position.x + .3f, playerBody.transform.position.y + .8f );
             GameObject bullet = (GameObject)Instantiate( swordwaveRightPrefab, pos, Quaternion.identity );
@@ -200,14 +212,14 @@ public class PlayerControl : MonoBehaviour {
         }
     }
 
-    void FlipPlayer() {
+    private void FlipPlayer() {
         facingRight = !facingRight;
         Vector2 localScale = gameObject.transform.localScale;
         localScale.x *= -1;
         transform.localScale = localScale;
     }
 
-    bool playerIsMoving() {
+    private bool playerIsMoving() {
         if ( playerJumpNum > 0 ) {
             return ( true );
         }
