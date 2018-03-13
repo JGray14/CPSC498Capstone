@@ -11,15 +11,15 @@ public class MiniknightController : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-        //body = gameObject.GetComponent<Rigidbody2D>();
-        //animator = GetComponent<Animator>();
-        //groundLayer = LayerMask.GetMask( "Ground" );
-        //player = GameObject.FindGameObjectWithTag( "Player" );
+        body = gameObject.GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>();
+        groundLayer = LayerMask.GetMask( "Ground" );
+        player = GameObject.FindGameObjectWithTag( "Player" );
     }
 	
 	// Update is called once per frame
 	void Update () {
-        //string animCall = "None";
-        //nav.SetDestination( player.transform.position );
+        string animCall = "Idle";
+        animator.Play( animCall );
     }
 }
