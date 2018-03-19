@@ -19,14 +19,19 @@ public class MiniknightController : MonoBehaviour {
     public float distanceFromPlayer;
     public bool right, left;
     public string animCall;
+    public string prevCall;
+    private bool moveRight, moveLeft;
+    private bool patrolMoveRight, patrolMoveLeft;
 
     // Use this for initialization
     void Start () {
-        body = gameObject.GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         jumpNum = 0;
         groundLayer = LayerMask.GetMask( "Ground" );
         player = GameObject.FindGameObjectWithTag( "Player" );
+        moveRight = false;
+        moveLeft = false;
+        prevCall = "None";
     }
 
     // Update is called once per frame
@@ -36,6 +41,24 @@ public class MiniknightController : MonoBehaviour {
             jumpNum = 0;
         }
 
+        if ( moveRight || patrolMoveRight ) {
+            body.AddForce( Vector2.right * speed * 4 );
+            moveRight = false;
+            faceRight();
+            animCall = "Walk";
+        } else if ( moveLeft || patrolMoveLeft ) {
+            body.AddForce( Vector2.left * speed * 4 );
+            moveLeft = false;
+            faceLeft();
+            animCall = "Walk";
+        }
+
+        if ( facingRight ) {
+            faceRight();
+        } else {
+            faceLeft();
+        }
+
         //GetComponent<Rigidbody2D>().velocity = new Vector2( -speed, body.velocity.y );
 
         //if ( body.velocity.x > 0.0f && facingRight == false ) {
@@ -43,7 +66,10 @@ public class MiniknightController : MonoBehaviour {
         //} else if ( body.velocity.x < 0.0f && facingRight == true ) {
         //    Flip();
         //}
-        animator.Play( animCall );
+        if ( animCall != prevCall ) {
+            animator.Play( animCall );
+        }
+        prevCall = animCall;
     }
 
     bool isGrounded() {
@@ -81,44 +107,36 @@ public class MiniknightController : MonoBehaviour {
     }
     
     [Task]
-    void patrol() {
-        patrolLeft();
-        patrolRight();
-    }
-    
     void patrolLeft() {
-        while ( !checkLeft() ) {
-            faceLeft();
-            body.AddForce( Vector2.left * speed * 4 );
-        }
-        return;
+        body.AddForce( Vector2.left * speed * 4 );
+        faceLeft();
     }
 
+    [Task]
     bool checkLeft() {
-        Vector2 pos = transform.position;
-        Vector2 diagLeft = new Vector2( -1, -1 );
+        Vector2 pos = body.transform.position;
         float distance = 1.0f;
-        Debug.DrawRay( pos, new Vector3( -1, -1, 0 ), Color.green, 10, false );
+        //Debug.DrawRay( pos, new Vector3( -1, -1, 0 ), Color.green, 10, false );
         RaycastHit2D wall = Physics2D.Raycast( pos, Vector2.left, distance, groundLayer );
-        RaycastHit2D ground = Physics2D.Raycast( pos, diagLeft, distance, groundLayer );
+        Vector2 leftpos = new Vector2( body.transform.position.x - 1, body.transform.position.y );
+        RaycastHit2D ground = Physics2D.Raycast( leftpos, Vector2.down, 1.0f, groundLayer );
         return ( left = ( wall.collider != null || ground.collider == null ) );
     }
     
+    [Task]
     void patrolRight() {
-        while ( !checkRight() ) {
-            faceRight();
-            body.AddForce( Vector2.right * speed * 4 );
-        }
-        return;
+        body.AddForce( Vector2.right * speed * 4 );
+        faceRight();
     }
 
+    [Task]
     bool checkRight() {
-        Vector2 pos = transform.position;
+        Vector2 pos = body.transform.position;
         Vector2 diagRight = new Vector2( 1, -1 );
-        Debug.DrawRay( pos, new Vector3( -1, -1, 0 ), Color.green, 10, false );
         float distance = 1.0f;
         RaycastHit2D wall = Physics2D.Raycast( pos, Vector2.right, distance, groundLayer );
-        RaycastHit2D ground = Physics2D.Raycast( pos, diagRight, distance, groundLayer );
+        Vector2 rightpos = new Vector2( body.transform.position.x + 1, body.transform.position.y );
+        RaycastHit2D ground = Physics2D.Raycast( rightpos, Vector2.down, 1.0f, groundLayer );
         return ( right = ( wall.collider != null || ground.collider == null ) );
     }
 
@@ -132,11 +150,10 @@ public class MiniknightController : MonoBehaviour {
     void hunt() {
         if ( player.transform.position.x < body.transform.position.x ) {
             faceLeft();
-            body.AddForce( Vector2.left * speed * 4 );
+            moveLeft = true;
         } else {
             faceRight();
-            body.AddForce( Vector2.right * speed * 4 );
+            moveRight = true;
         }
-        animCall = "Walk";
     }
 }

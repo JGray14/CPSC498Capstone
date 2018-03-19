@@ -25,6 +25,7 @@ public class PlayerControl : MonoBehaviour {
     private Color dashColor;
     private Color hitColor;
     private Color healColor;
+    public bool leftTesting;
 
     private Animator animator;
     //public  float speed = 1f;
@@ -49,6 +50,14 @@ public class PlayerControl : MonoBehaviour {
     }
 
     void PlayerMove() {
+        //TESTING SPACE
+
+        Vector2 diagLeft = new Vector2( -1, -1 );
+        Vector2 leftpos = new Vector2( playerBody.transform.position.x - 1, playerBody.transform.position.y );
+        RaycastHit2D ground = Physics2D.Raycast( leftpos, Vector2.down, 1.0f, groundLayer );
+        leftTesting = ground.collider == null;
+
+        //
         if ( playerHealth == 0 ) {
             //GameOver();
         }

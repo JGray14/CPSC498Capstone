@@ -11,4 +11,11 @@ tree "hunt"
 tree "patrol"
 	while
 		not playerNearby
-		patrol
+		fallback
+			while
+				not checkLeft
+				patrolLeft
+			while
+				not checkRight
+				patrolRight
+		
