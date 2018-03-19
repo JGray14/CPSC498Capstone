@@ -26,6 +26,7 @@ public class MiniknightController : MonoBehaviour {
     // Use this for initialization
     void Start () {
         animator = GetComponent<Animator>();
+        health = 3;
         jumpNum = 0;
         groundLayer = LayerMask.GetMask( "Ground" );
         player = GameObject.FindGameObjectWithTag( "Player" );
@@ -70,6 +71,12 @@ public class MiniknightController : MonoBehaviour {
             animator.Play( animCall );
         }
         prevCall = animCall;
+
+        
+        //if(health <= 0)
+        //{
+        //    Destroy(this.gameObject);
+        //}
     }
 
     bool isGrounded() {
@@ -154,6 +161,15 @@ public class MiniknightController : MonoBehaviour {
         } else {
             faceRight();
             moveRight = true;
+        }
+    }
+
+    //if enemy is hit
+    private void OnCollisionEnter2D(Collision2D other)
+    {
+        if(other.gameObject.tag == "Player")
+        {
+            health--;
         }
     }
 }

@@ -58,7 +58,7 @@ public class PlayerControl : MonoBehaviour {
         leftTesting = ground.collider == null;
 
         //
-        if ( playerHealth == 0 ) {
+        if ( playerHealth <= 0 ) {
             //GameOver();
         }
         //setHealth();
@@ -152,6 +152,7 @@ public class PlayerControl : MonoBehaviour {
 
     IEnumerator Hit() {
         GetComponent<Renderer>().material.color = hitColor;
+        print("is red");
         yield return new WaitForSeconds( .1f );
         GetComponent<Renderer>().material.color = normalColor;
         yield return new WaitForSeconds( .1f );
@@ -221,5 +222,14 @@ public class PlayerControl : MonoBehaviour {
             return ( true );
         }
         return ( moveX != 0 );
+    }
+
+    private void OnCollisionEnter2D(Collision2D other)
+    {
+        if (other.gameObject.tag == "Enemy")
+        {
+            playerHealth--;
+            StartCoroutine(Hit());
+        }
     }
 }
