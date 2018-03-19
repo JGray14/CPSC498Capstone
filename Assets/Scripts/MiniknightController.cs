@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Panda;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -79,6 +80,7 @@ public class MiniknightController : MonoBehaviour {
         }
     }
     
+    [Task]
     void patrol() {
         patrolLeft();
         patrolRight();
@@ -119,12 +121,14 @@ public class MiniknightController : MonoBehaviour {
         RaycastHit2D ground = Physics2D.Raycast( pos, diagRight, distance, groundLayer );
         return ( right = ( wall.collider != null || ground.collider == null ) );
     }
-    
+
+    [Task]
     bool playerNearby() {
         distanceFromPlayer = Vector2.Distance( player.GetComponent<Rigidbody2D>().position, body.position );
         return ( distanceFromPlayer < 10 );
     }
-    
+
+    [Task]
     void hunt() {
         if ( player.transform.position.x < body.transform.position.x ) {
             faceLeft();
