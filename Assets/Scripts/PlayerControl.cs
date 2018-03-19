@@ -19,7 +19,7 @@ public class PlayerControl : MonoBehaviour {
     private float moveX;
     public  int attack1Length;
     public  int attack2Length;
-    public  bool GroundTest;
+    public  bool Grounded;
     private string animCall;
     private Color normalColor;
     private Color dashColor;
@@ -162,7 +162,7 @@ public class PlayerControl : MonoBehaviour {
         float distance = 1.0f;
         RaycastHit2D hit = Physics2D.Raycast( pos, direction, distance, groundLayer );
         //Debug.DrawRay( pos, direction, Color.green );
-        return ( GroundTest = hit.collider != null );
+        return ( Grounded = hit.collider != null );
 
     }
 
