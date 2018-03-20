@@ -59,7 +59,7 @@ public class PlayerControl : MonoBehaviour {
 
         //
         if ( playerHealth <= 0 ) {
-            //GameOver();
+            SceneManager.LoadScene(2);
         }
         //setHealth();
         if ( Input.GetButtonDown( "Cancel" ) ) {
