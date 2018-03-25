@@ -52,6 +52,7 @@ public class PlayerControl : MonoBehaviour {
     void PlayerMove() {
         //TESTING SPACE
 
+        //TESTING SPACE
         Vector2 diagLeft = new Vector2( -1, -1 );
         Vector2 leftpos = new Vector2( playerBody.transform.position.x - 1, playerBody.transform.position.y );
         RaycastHit2D ground = Physics2D.Raycast( leftpos, Vector2.down, 1.0f, groundLayer );
@@ -59,7 +60,7 @@ public class PlayerControl : MonoBehaviour {
 
         //
         if ( playerHealth <= 0 ) {
-            SceneManager.LoadScene(2);
+            SceneManager.LoadScene( 2 );
         }
         //setHealth();
         if ( Input.GetButtonDown( "Cancel" ) ) {
@@ -152,7 +153,7 @@ public class PlayerControl : MonoBehaviour {
 
     IEnumerator Hit() {
         GetComponent<Renderer>().material.color = hitColor;
-        print("is red");
+        print( "is red" );
         yield return new WaitForSeconds( .1f );
         GetComponent<Renderer>().material.color = normalColor;
         yield return new WaitForSeconds( .1f );
@@ -224,12 +225,13 @@ public class PlayerControl : MonoBehaviour {
         return ( moveX != 0 );
     }
 
-    private void OnCollisionEnter2D(Collision2D other)
-    {
-        if (other.gameObject.tag == "Enemy")
-        {
-            playerHealth--;
-            StartCoroutine(Hit());
-        }
+    public void damage( int value ) {
+        playerHealth -= value;
     }
+
+    public void knockback( int force, Vector2 direction ) {
+        playerBody.AddForce( direction * force );
+    }
+
+    //other.gameObject.GetComponent<Enemy>().damage( 1, 800, body.transform.position - other.gameObject.GetComponent<Rigidbody2D>().transform.position );
 }

@@ -1,9 +1,8 @@
-﻿using Panda;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections;
+using Panda;
 using UnityEngine;
 
-public class MiniknightController : MonoBehaviour {
+public class MiniknightController : MonoBehaviour, Enemy {
 
     public Rigidbody2D body;
     private LayerMask groundLayer;
@@ -22,9 +21,12 @@ public class MiniknightController : MonoBehaviour {
     public string prevCall;
     private bool moveRight, moveLeft;
     private bool patrolMoveRight, patrolMoveLeft;
+    private bool die;
+    private Color normalColor;
 
     // Use this for initialization
     void Start () {
+        body = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         health = 3;
         jumpNum = 0;
@@ -33,11 +35,17 @@ public class MiniknightController : MonoBehaviour {
         moveRight = false;
         moveLeft = false;
         prevCall = "None";
+        die = false;
+        normalColor = GetComponent<Renderer>().material.color;
     }
 
     // Update is called once per frame
     void Update() {
-        animCall = "Idle";
+        //animCall = "Idle";
+        if ( health < 1 ) {
+            die = true;
+        }
+        animCall = "Walk";
         if ( isGrounded() == true ) {
             jumpNum = 0;
         }
@@ -77,6 +85,13 @@ public class MiniknightController : MonoBehaviour {
         //{
         //    Destroy(this.gameObject);
         //}
+    }
+
+    void LateUpdate() {
+        if ( die ) {
+            animator.Play( "Die" );
+            StartCoroutine( Kill() );
+        }
     }
 
     bool isGrounded() {
@@ -164,12 +179,29 @@ public class MiniknightController : MonoBehaviour {
         }
     }
 
+    IEnumerator Hit() {
+        GetComponent<Renderer>().material.color = Color.red;
+        print( "is red" );
+        yield return new WaitForSeconds( .1f );
+        GetComponent<Renderer>().material.color = normalColor;
+        yield return new WaitForSeconds( .1f );
+    }
+
+    IEnumerator Kill() {
+        yield return new WaitForSeconds( .4f );
+        DestroyObject( gameObject );
+    }
+
+    public void damage( int value, int force, Vector2 direction ) {
+        health -= value;
+        body.AddForce( direction * force );
+        StartCoroutine( Hit() );
+    }
+
     //if enemy is hit
-    private void OnCollisionEnter2D(Collision2D other)
-    {
-        if(other.gameObject.tag == "Player")
-        {
-            health--;
+    private void OnTriggerEnter2D(Collider2D other) {
+        if ( other.gameObject.tag == "PlayerHurtbox" ) {
+            damage( 1, 800,  body.transform.position - other.gameObject.transform.position );
         }
     }
 }

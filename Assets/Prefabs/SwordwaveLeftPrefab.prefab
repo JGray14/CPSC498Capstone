@@ -22,9 +22,10 @@ GameObject:
   - component: {fileID: 212906558810680556}
   - component: {fileID: 50785367825062870}
   - component: {fileID: 114369804655085888}
+  - component: {fileID: 60758666241988872}
   m_Layer: 0
   m_Name: SwordwaveLeftPrefab
-  m_TagString: Untagged
+  m_TagString: PlayerHurtbox
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -36,7 +37,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1926904993256538}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.202, y: -3.084, z: 2.0788965}
+  m_LocalPosition: {x: -10.779055, y: 1.7510667, z: 2.0788965}
   m_LocalScale: {x: 9.872691, y: 9.610926, z: 8.940396}
   m_Children: []
   m_Father: {fileID: 0}
@@ -62,6 +63,38 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!60 &60758666241988872
+PolygonCollider2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1926904993256538}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 0.08, y: 0.17}
+    newSize: {x: 0.08, y: 0.17}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: -0.033049766, y: 0.057018265}
+      - {x: -0.040917225, y: 0.0041619786}
+      - {x: -0.04, y: -0.085}
+      - {x: -0.0062801708, y: -0.08417264}
+      - {x: 0.010585508, y: -0.064398624}
+      - {x: 0.01297938, y: 0.0047569973}
+      - {x: 0.04, y: 0.085}
+      - {x: 0.013480526, y: 0.082253166}
 --- !u!114 &114369804655085888
 MonoBehaviour:
   m_ObjectHideFlags: 1
