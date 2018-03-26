@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using UnityEngine.SceneManagement;
 using UnityEngine;
 
-public class GameOverContinue : MonoBehaviour {
+public class LoadScene : MonoBehaviour {
 
     public void LoadByIndex(int sceneIndex) {
-        SceneManager.LoadScene( "Main" );
+        SceneManager.LoadScene( sceneIndex );
     }
 }

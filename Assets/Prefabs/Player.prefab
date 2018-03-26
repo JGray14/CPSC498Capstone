@@ -200,18 +200,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cce076dea3aacc642b2b26cee551e5c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerHealth: 0
-  playerSpeed: 12
-  DashCooldown: 0
-  playerDashPower: 1000
-  attack1Length: 0
-  attack2Length: 0
-  Grounded: 0
-  leftTesting: 0
   swordwaveRightPrefab: {fileID: 1231169571809478, guid: 1a4bcb74b24a017459356cba4552042e,
     type: 2}
   swordwaveLeftPrefab: {fileID: 1926904993256538, guid: fb6502a88ec447c41a749f01597e767f,
     type: 2}
+  deathGUI: {fileID: 0}
+  playerHealth: 0
+  playerSpeed: 12
+  DashCooldown: 0
+  playerDashPower: 1000
+  Grounded: 0
+  attack1Length: 0
+  attack2Length: 0
 --- !u!212 &212086470265881820
 SpriteRenderer:
   m_ObjectHideFlags: 1

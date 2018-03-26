@@ -10,6 +10,7 @@ public class PlayerControl : MonoBehaviour {
     private Animator animator;
     public  GameObject swordwaveRightPrefab;
     public  GameObject swordwaveLeftPrefab;
+    public  Canvas deathGUI;
 
     private Color normalColor;
     private Color dashColor;
@@ -176,7 +177,9 @@ public class PlayerControl : MonoBehaviour {
         yield return new WaitForSeconds( .1f );
         gameObject.GetComponent<Renderer>().enabled = false;
         yield return new WaitForSeconds( .5f );
-        SceneManager.LoadScene( "GameOver" );
+        deathGUI.gameObject.SetActive( true );
+        //deathGUI.GetComponent<GameOverFadeIn>().dead = true;
+        Destroy( gameObject );
     }
 
 
@@ -258,5 +261,4 @@ public class PlayerControl : MonoBehaviour {
             StartCoroutine( Kill() );
         }
     }
-    //other.gameObject.GetComponent<Enemy>().damage( 1, 800, body.transform.position - other.gameObject.GetComponent<Rigidbody2D>().transform.position );
 }

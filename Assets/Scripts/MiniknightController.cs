@@ -173,8 +173,11 @@ public class MiniknightController : MonoBehaviour, Enemy {
 
     [Task]
     bool playerNearby() {
-        distanceFromPlayer = Vector2.Distance( player.GetComponent<Rigidbody2D>().position, body.position );
-        return ( distanceFromPlayer < 10 || health < 3 );
+        if ( player != null ) {
+            distanceFromPlayer = Vector2.Distance( player.GetComponent<Rigidbody2D>().position, body.position );
+            return ( distanceFromPlayer < 10 || health < 3 );
+        }
+        return ( false );
     }
 
     [Task]
@@ -190,7 +193,6 @@ public class MiniknightController : MonoBehaviour, Enemy {
 
     IEnumerator Hit() {
         GetComponent<Renderer>().material.color = Color.red;
-        print( "is red" );
         yield return new WaitForSeconds( .1f );
         GetComponent<Renderer>().material.color = normalColor;
         yield return new WaitForSeconds( .1f );

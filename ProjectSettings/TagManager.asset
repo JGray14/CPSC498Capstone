@@ -10,6 +10,7 @@ TagManager:
   - EnemyHurtbox
   - PlayerProjectileHurtbox
   - Spikes
+  - DeathCanvas
   layers:
   - Default
   - TransparentFX

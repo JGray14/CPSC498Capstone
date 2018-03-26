@@ -78,8 +78,8 @@ AnimationClip:
         outSlope: Infinity
         tangentMode: 103
       - serializedVersion: 2
-        time: 1.0833334
-        value: 0
+        time: 0.8333333
+        value: 0.000012015924
         inSlope: Infinity
         outSlope: Infinity
         tangentMode: 103
@@ -247,8 +247,8 @@ AnimationClip:
         outSlope: Infinity
         tangentMode: 103
       - serializedVersion: 2
-        time: 1.0833334
-        value: 0
+        time: 0.8333333
+        value: 0.000012015924
         inSlope: Infinity
         outSlope: Infinity
         tangentMode: 103
