@@ -8,6 +8,8 @@ TagManager:
   - Enemy
   - PlayerHurtbox
   - EnemyHurtbox
+  - PlayerProjectileHurtbox
+  - Spikes
   layers:
   - Default
   - TransparentFX

@@ -11,9 +11,9 @@ public class Spikes : MonoBehaviour {
         obj = other.gameObject;
         if ( obj.tag == "Player" ) {
             //PlayerIsKill( other );
-            SceneManager.LoadScene( "Testing" );
+            //SceneManager.LoadScene( "Testing" );
         } else {
-            Destroy( other.gameObject );
+           // Destroy( other.gameObject );
         }
         
     }

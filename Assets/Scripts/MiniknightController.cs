@@ -8,12 +8,14 @@ public class MiniknightController : MonoBehaviour, Enemy {
     private LayerMask groundLayer;
     private Animator animator;
     private GameObject player;
+
     public int health;
     public  int speed = 200;
     private int jumpNum;
-    public  bool Grounded;
     private int jumpBuffer;
     private int jumpPower = 1500;
+
+    public  bool Grounded;
     private bool facingRight = false;
     public float distanceFromPlayer;
     public bool right, left;
@@ -23,6 +25,13 @@ public class MiniknightController : MonoBehaviour, Enemy {
     private bool patrolMoveRight, patrolMoveLeft;
     private bool die;
     private Color normalColor;
+
+    //Damage/knockback values
+    private int meleeAtkDamage = 1;
+    private int meleeKnockback = 1500;
+    private int rangedAtkDamage = 1;
+    private int rangedKnockback = 1000;
+
 
     // Use this for initialization
     void Start () {
@@ -165,7 +174,7 @@ public class MiniknightController : MonoBehaviour, Enemy {
     [Task]
     bool playerNearby() {
         distanceFromPlayer = Vector2.Distance( player.GetComponent<Rigidbody2D>().position, body.position );
-        return ( distanceFromPlayer < 10 );
+        return ( distanceFromPlayer < 10 || health < 3 );
     }
 
     [Task]
@@ -201,7 +210,11 @@ public class MiniknightController : MonoBehaviour, Enemy {
     //if enemy is hit
     private void OnTriggerEnter2D(Collider2D other) {
         if ( other.gameObject.tag == "PlayerHurtbox" ) {
-            damage( 1, 800,  body.transform.position - other.gameObject.transform.position );
+            damage( meleeAtkDamage, meleeKnockback, Vector3.Normalize( body.transform.position - other.gameObject.transform.position ) );
+        } else if ( other.gameObject.tag == "PlayerProjectileHurtbox" ) {
+            damage( rangedAtkDamage, rangedKnockback, Vector3.Normalize( body.transform.position - other.gameObject.transform.position ) );
+        } else if ( other.gameObject.tag == "Spikes" ) {
+            StartCoroutine( Kill() );
         }
     }
 }

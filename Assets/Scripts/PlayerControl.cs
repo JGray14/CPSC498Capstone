@@ -7,30 +7,36 @@ public class PlayerControl : MonoBehaviour {
 
     private Rigidbody2D playerBody;
     private LayerMask groundLayer;
+    private Animator animator;
+    public  GameObject swordwaveRightPrefab;
+    public  GameObject swordwaveLeftPrefab;
+
+    private Color normalColor;
+    private Color dashColor;
+    private Color hitColor;
+    private Color healColor;
+
     public int playerHealth;
     public  int playerSpeed = 10;
-    private bool facingRight = true;
     private int playerJumpNum = 0;
     private int jumpBuffer;
     private int playerJumpPower = 1500;
     public  int DashCooldown = 0;
     private int DashImpulse = 0;
     public  int playerDashPower = 1000;
+    private bool facingRight = true;
+    public  bool Grounded;
     private float moveX;
     public  int attack1Length;
     public  int attack2Length;
-    public  bool Grounded;
     private string animCall;
-    private Color normalColor;
-    private Color dashColor;
-    private Color hitColor;
-    private Color healColor;
-    public bool leftTesting;
 
-    private Animator animator;
-    //public  float speed = 1f;
-    public  GameObject swordwaveRightPrefab;
-    public  GameObject swordwaveLeftPrefab;
+    //Damage/knockback values
+    private int meleeAtkDamage = 1;
+    private int meleeKnockback = 1500;
+    private int rangedAtkDamage = 1;
+    private int rangedKnockback = 1000;
+
 
     // Use this for initialization
     void Start() {
@@ -51,16 +57,15 @@ public class PlayerControl : MonoBehaviour {
 
     void PlayerMove() {
         //TESTING SPACE
-
+        //Vector2 diagLeft = new Vector2( -1, -1 );
+        //Vector2 leftpos = new Vector2( playerBody.transform.position.x - 1, playerBody.transform.position.y );
+        //RaycastHit2D ground = Physics2D.Raycast( leftpos, Vector2.down, 1.0f, groundLayer );
+        //leftTesting = ground.collider == null;
         //TESTING SPACE
-        Vector2 diagLeft = new Vector2( -1, -1 );
-        Vector2 leftpos = new Vector2( playerBody.transform.position.x - 1, playerBody.transform.position.y );
-        RaycastHit2D ground = Physics2D.Raycast( leftpos, Vector2.down, 1.0f, groundLayer );
-        leftTesting = ground.collider == null;
 
         //
         if ( playerHealth <= 0 ) {
-            SceneManager.LoadScene( 2 );
+            StartCoroutine( Kill() );
         }
         //setHealth();
         if ( Input.GetButtonDown( "Cancel" ) ) {
@@ -74,7 +79,7 @@ public class PlayerControl : MonoBehaviour {
         }
         //Reset incase escape from map borders
         if ( playerBody.position.y < -20 ) {
-            SceneManager.LoadScene( "Testing" );
+            SceneManager.LoadScene( "Main" );
         }
         if ( isGrounded() == true ) {
             playerJumpNum = 0;
@@ -134,7 +139,7 @@ public class PlayerControl : MonoBehaviour {
 
         if ( Input.GetButtonDown( "Attack1" ) && attack1Length == 0 && attack2Length == 0 ) {
             Attack1();
-            attack1Length = 35;
+            attack1Length = 40;
         }
 
         //Priority should be handled by code order
@@ -164,6 +169,14 @@ public class PlayerControl : MonoBehaviour {
         yield return new WaitForSeconds( .1f );
         GetComponent<Renderer>().material.color = normalColor;
         yield return new WaitForSeconds( .1f );
+    }
+
+    IEnumerator Kill() {
+        GetComponent<Renderer>().material.color = hitColor;
+        yield return new WaitForSeconds( .1f );
+        gameObject.GetComponent<Renderer>().enabled = false;
+        yield return new WaitForSeconds( .5f );
+        SceneManager.LoadScene( "GameOver" );
     }
 
 
@@ -212,10 +225,12 @@ public class PlayerControl : MonoBehaviour {
     }
 
     void FlipPlayer() {
-        facingRight = !facingRight;
-        Vector2 localScale = gameObject.transform.localScale;
-        localScale.x *= -1;
-        transform.localScale = localScale;
+        if ( attack1Length == 0 && attack2Length == 0 ) {
+            facingRight = !facingRight;
+            Vector2 localScale = gameObject.transform.localScale;
+            localScale.x *= -1;
+            transform.localScale = localScale;
+        }
     }
 
     bool playerIsMoving() {
@@ -228,10 +243,20 @@ public class PlayerControl : MonoBehaviour {
     public void damage( int value ) {
         playerHealth -= value;
     }
-
-    public void knockback( int force, Vector2 direction ) {
+    
+    public void damage( int value, int force, Vector2 direction ) {
+        playerHealth -= value;
         playerBody.AddForce( direction * force );
+        StartCoroutine( Hit() );
     }
 
+    //if player is hit
+    private void OnTriggerEnter2D( Collider2D other ) {
+        if ( other.gameObject.tag == "EnemyHurtbox" ) {
+            damage( meleeAtkDamage, meleeKnockback, Vector3.Normalize( playerBody.transform.position - other.gameObject.transform.position ) );
+        } else if ( other.gameObject.tag == "Spikes" ) {
+            StartCoroutine( Kill() );
+        }
+    }
     //other.gameObject.GetComponent<Enemy>().damage( 1, 800, body.transform.position - other.gameObject.GetComponent<Rigidbody2D>().transform.position );
 }
