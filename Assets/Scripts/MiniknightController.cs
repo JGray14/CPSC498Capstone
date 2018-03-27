@@ -17,13 +17,12 @@ public class MiniknightController : MonoBehaviour, Enemy {
 
     public  bool Grounded;
     private bool facingRight = false;
-    public float distanceFromPlayer;
-    public bool right, left;
-    public string animCall;
-    public string prevCall;
+    private float distanceFromPlayer;
+    private bool right, left;
+    private string animCall;
     private bool moveRight, moveLeft;
-    private bool patrolMoveRight, patrolMoveLeft;
     private bool die;
+
     private Color normalColor;
 
     //Damage/knockback values
@@ -43,14 +42,13 @@ public class MiniknightController : MonoBehaviour, Enemy {
         player = GameObject.FindGameObjectWithTag( "Player" );
         moveRight = false;
         moveLeft = false;
-        prevCall = "None";
         die = false;
         normalColor = GetComponent<Renderer>().material.color;
     }
 
     // Update is called once per frame
     void Update() {
-        //animCall = "Idle";
+        animCall = "None";
         if ( health < 1 ) {
             die = true;
         }
@@ -59,12 +57,12 @@ public class MiniknightController : MonoBehaviour, Enemy {
             jumpNum = 0;
         }
 
-        if ( moveRight || patrolMoveRight ) {
+        if ( moveRight ) {
             body.AddForce( Vector2.right * speed * 4 );
             moveRight = false;
             faceRight();
             animCall = "Walk";
-        } else if ( moveLeft || patrolMoveLeft ) {
+        } else if ( moveLeft ) {
             body.AddForce( Vector2.left * speed * 4 );
             moveLeft = false;
             faceLeft();
@@ -76,24 +74,9 @@ public class MiniknightController : MonoBehaviour, Enemy {
         } else {
             faceLeft();
         }
-
-        //GetComponent<Rigidbody2D>().velocity = new Vector2( -speed, body.velocity.y );
-
-        //if ( body.velocity.x > 0.0f && facingRight == false ) {
-        //    Flip();
-        //} else if ( body.velocity.x < 0.0f && facingRight == true ) {
-        //    Flip();
-        //}
-        if ( animCall != prevCall ) {
+        if ( animCall != "None" && die != true ) {
             animator.Play( animCall );
         }
-        prevCall = animCall;
-
-        
-        //if(health <= 0)
-        //{
-        //    Destroy(this.gameObject);
-        //}
     }
 
     void LateUpdate() {

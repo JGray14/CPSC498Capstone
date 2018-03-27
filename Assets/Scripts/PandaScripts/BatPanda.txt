@@ -1,0 +1,14 @@
+tree "Root"
+	fallback
+		tree( "hunt" )
+		tree( "roost" )
+
+tree "hunt"
+	while 
+		playerNearby
+		hunt
+
+tree "roost"
+	while
+		not playerNearby
+		roost

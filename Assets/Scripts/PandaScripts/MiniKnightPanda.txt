@@ -18,4 +18,3 @@ tree "patrol"
 			while
 				not checkRight
 				patrolRight
-		
