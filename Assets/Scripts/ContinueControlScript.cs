@@ -10,6 +10,8 @@ public class ContinueControlScript : MonoBehaviour {
 	void Start () {
         if ( PlayerPrefs.HasKey( "Checkpoint" ) ) {
             ContinueButton.SetActive( true );
+        } else {
+            ContinueButton.SetActive( false );
         }
 	}
 	
