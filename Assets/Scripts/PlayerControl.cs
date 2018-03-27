@@ -17,17 +17,18 @@ public class PlayerControl : MonoBehaviour {
     private Color hitColor;
     private Color healColor;
 
+    private float moveX;
     public int playerHealth;
     public  int playerSpeed = 10;
     private int playerJumpNum = 0;
     private int jumpBuffer;
     private int playerJumpPower = 1500;
+    public bool hasDash;
     public  int DashCooldown = 0;
     private int DashImpulse = 0;
     public  int playerDashPower = 1000;
     private bool facingRight = true;
     public  bool Grounded;
-    private float moveX;
     public  int attack1Length;
     public  int attack2Length;
     private string animCall;
@@ -49,6 +50,7 @@ public class PlayerControl : MonoBehaviour {
         dashColor = Color.cyan;
         hitColor = Color.red;
         healColor = Color.green;
+        hasDash = true;
     }
 
     // Update is called once per frame
@@ -120,16 +122,9 @@ public class PlayerControl : MonoBehaviour {
             jumpBuffer = 5;
         }
 
-        if ( ( Input.GetButtonDown( "Dash" ) || Input.GetAxis( "Dash (Controller)" ) == 1 ) && DashCooldown == 0 && attack1Length == 0 && attack2Length == 0 ) {
+        if ( ( Input.GetButtonDown( "Dash" ) || Input.GetAxis( "Dash (Controller)" ) == 1 ) && DashCooldown == 0 && attack1Length == 0 && attack2Length == 0 && hasDash ) {
             Dash();
         }
-
-        if ( moveX > 0.0f && facingRight == false ) {
-            FlipPlayer();
-        } else if ( moveX < 0.0f && facingRight == true ) {
-            FlipPlayer();
-        }
-        playerBody.velocity = new Vector2( moveX * playerSpeed, gameObject.GetComponent<Rigidbody2D>().velocity.y );
 
         if ( ( Input.GetButtonDown( "Attack2" ) || Input.GetAxis( "Attack2" ) == 1 ) && attack2Length == 0 && attack1Length == 0 ) {
             //Attack2();
@@ -148,6 +143,15 @@ public class PlayerControl : MonoBehaviour {
         if ( animCall != "None" ) {
             animator.Play( animCall );
         }
+    }
+
+    void LateUpdate() {
+        if ( moveX > 0.0f && facingRight == false ) {
+            FlipPlayer();
+        } else if ( moveX < 0.0f && facingRight == true ) {
+            FlipPlayer();
+        }
+        playerBody.velocity = new Vector2( moveX * playerSpeed, gameObject.GetComponent<Rigidbody2D>().velocity.y );
     }
 
     IEnumerator DashReset() {

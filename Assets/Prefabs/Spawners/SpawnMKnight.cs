@@ -15,11 +15,13 @@ public class SpawnMKnight : MonoBehaviour {
     }
 
     void Update() {
-        pos = gameObject.transform.position;
-        distanceFromPlayer = Vector2.Distance( player.GetComponent<Rigidbody2D>().position, pos );
-        if ( distanceFromPlayer < 20 ) {
-            Instantiate( MiniKnightPrefab, pos, Quaternion.identity );
-            Destroy( gameObject );
+        if ( player != null ) {
+            pos = gameObject.transform.position;
+            distanceFromPlayer = Vector2.Distance( player.GetComponent<Rigidbody2D>().position, pos );
+            if ( distanceFromPlayer < 20 ) {
+                Instantiate( MiniKnightPrefab, pos, Quaternion.identity );
+                Destroy( gameObject );
+            }
         }
     }
 }
