@@ -30,7 +30,6 @@ public class BatController : MonoBehaviour {
     // Update is called once per frame
     void Update() {
         animCall = "None";
-
     }
 
     [Task]

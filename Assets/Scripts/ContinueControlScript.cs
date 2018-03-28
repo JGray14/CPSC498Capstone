@@ -12,6 +12,7 @@ public class ContinueControlScript : MonoBehaviour {
             ContinueButton.SetActive( true );
         } else {
             ContinueButton.SetActive( false );
+            PlayerPrefs.SetInt( "Checkpoint", 0 );
         }
 	}
 	
