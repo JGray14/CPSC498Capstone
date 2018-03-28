@@ -11,6 +11,7 @@ TagManager:
   - PlayerProjectileHurtbox
   - Spikes
   - DeathCanvas
+  - HeartPickup
   layers:
   - Default
   - TransparentFX

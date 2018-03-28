@@ -68,7 +68,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1833500818403368}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 43.18, y: 0.95, z: 0}
+  m_LocalPosition: {x: -8.608875, y: -0.58906627, z: 0}
   m_LocalScale: {x: 10, y: 10, z: 1}
   m_Children:
   - {fileID: 4243501085857838}
@@ -154,10 +154,10 @@ PolygonCollider2D:
   m_Points:
     m_Paths:
     - - {x: -0.050000764, y: 0.08003764}
-      - {x: -0.10002174, y: 0.08117878}
-      - {x: -0.14931642, y: 0.01950422}
-      - {x: -0.14996834, y: -0.050255563}
-      - {x: -0.050159074, y: -0.04996205}
+      - {x: -0.100830175, y: 0.05369395}
+      - {x: -0.11850061, y: 0.018834282}
+      - {x: -0.11769676, y: -0.013347137}
+      - {x: -0.04854231, y: -0.016010195}
 --- !u!95 &95505860344967986
 Animator:
   serializedVersion: 3
@@ -208,9 +208,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   body: {fileID: 50699704008685208}
+  heartPickupPrefab: {fileID: 1291591507089530, guid: c6f84cb24862f484eb5e96a74bcfde9b,
+    type: 2}
   health: 0
   speed: 10
   attackHit: 0
+  iFrames: 0
   Grounded: 0
 --- !u!212 &212994673464119572
 SpriteRenderer:

@@ -24,7 +24,7 @@ GameObject:
   - component: {fileID: 114206850140371620}
   - component: {fileID: 60518893693875352}
   m_Layer: 0
-  m_Name: swordwaveRightPrefab
+  m_Name: swordwaveRight
   m_TagString: PlayerProjectileHurtbox
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

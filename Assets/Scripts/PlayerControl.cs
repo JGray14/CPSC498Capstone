@@ -32,7 +32,7 @@ public class PlayerControl : MonoBehaviour {
     public  int attack1Length;
     public  int attack2Length;
     private string animCall;
-    private bool invincibilityActive = false;
+    public int iFrames = 0;
 
     //Damage/knockback values
     private int meleeAtkDamage = 1;
@@ -68,6 +68,12 @@ public class PlayerControl : MonoBehaviour {
         //TESTING SPACE
 
         //
+
+        //Reset incase escape from map borders
+        if ( playerBody.position.y < -20 ) {
+            SceneManager.LoadScene( "Main" );
+        }
+
         if ( playerHealth <= 0 ) {
             StartCoroutine( Kill() );
         }
@@ -81,10 +87,7 @@ public class PlayerControl : MonoBehaviour {
         if ( DashCooldown == 1 ) {
             StartCoroutine( DashReset() );
         }
-        //Reset incase escape from map borders
-        if ( playerBody.position.y < -20 ) {
-            SceneManager.LoadScene( "Main" );
-        }
+
         if ( isGrounded() == true ) {
             playerJumpNum = 0;
 
@@ -108,6 +111,9 @@ public class PlayerControl : MonoBehaviour {
         }
         if ( DashCooldown > 0 ) {
             DashCooldown--;
+        }
+        if ( iFrames > 0 ) {
+            iFrames--;
         }
 
         if ( DashImpulse > 0 ) {
@@ -154,43 +160,6 @@ public class PlayerControl : MonoBehaviour {
         }
         playerBody.velocity = new Vector2( moveX * playerSpeed, gameObject.GetComponent<Rigidbody2D>().velocity.y );
     }
-
-    IEnumerator DashReset() {
-        GetComponent<Renderer>().material.color = dashColor;
-        yield return new WaitForSeconds( .1f );
-        GetComponent<Renderer>().material.color = normalColor;
-        yield return new WaitForSeconds( .1f );
-    }
-
-    IEnumerator Hit() {
-        GetComponent<Renderer>().material.color = hitColor;
-        yield return new WaitForSeconds( .1f );
-        GetComponent<Renderer>().material.color = normalColor;
-        yield return new WaitForSeconds( .1f );
-    }
-
-    IEnumerator Heal() {
-        GetComponent<Renderer>().material.color = healColor;
-        yield return new WaitForSeconds( .1f );
-        GetComponent<Renderer>().material.color = normalColor;
-        yield return new WaitForSeconds( .1f );
-    }
-
-    IEnumerator Kill() {
-        GetComponent<Renderer>().material.color = hitColor;
-        yield return new WaitForSeconds( .1f );
-        gameObject.GetComponent<Renderer>().enabled = false;
-        yield return new WaitForSeconds( .5f );
-        deathGUI.gameObject.SetActive( true );
-        //deathGUI.GetComponent<GameOverFadeIn>().dead = true;
-        Destroy( gameObject );
-    }
-
-    IEnumerator Invincible()
-    {
-        yield return new WaitForSecondsRealtime(10);
-    }
-
 
     bool isGrounded() {
         Vector2 pos = transform.position;
@@ -264,20 +233,53 @@ public class PlayerControl : MonoBehaviour {
 
     //if player is hit
     private void OnTriggerEnter2D( Collider2D other ) {
-        if ( invincibilityActive == false)
-        {
-            if (other.gameObject.tag == "EnemyHurtbox")
-            {
+        if ( iFrames <= 0 ) {
+            if ( other.gameObject.tag == "EnemyHurtbox" ) {
                 damage(meleeAtkDamage, meleeKnockback, Vector3.Normalize(playerBody.transform.position - other.gameObject.transform.position));
-                invincibilityActive = true;
-                StartCoroutine(Invincible());
-                //invincibilityActive = false;
+                StartCoroutine( Hit() );
+                iFrames = 20;
             }
-            else if (other.gameObject.tag == "Spikes")
-            {
-                StartCoroutine(Kill());
+            else if ( other.gameObject.tag == "Spikes" ) {
+                StartCoroutine( Kill() );
             }
         }
-        
+        if ( other.gameObject.tag == "HeartPickup" ) {
+            if ( playerHealth < 6 ) {
+                playerHealth++;
+                StartCoroutine( Heal() );
+                Destroy( other.gameObject );
+            }
+        }
+    }
+
+    IEnumerator DashReset() {
+        GetComponent<Renderer>().material.color = dashColor;
+        yield return new WaitForSeconds( .1f );
+        GetComponent<Renderer>().material.color = normalColor;
+        yield return new WaitForSeconds( .1f );
+    }
+
+    IEnumerator Hit() {
+        GetComponent<Renderer>().material.color = hitColor;
+        yield return new WaitForSeconds( .1f );
+        GetComponent<Renderer>().material.color = normalColor;
+        yield return new WaitForSeconds( .1f );
+    }
+
+    IEnumerator Heal() {
+            GetComponent<Renderer>().material.color = healColor;
+            yield return new WaitForSeconds( .1f );
+            GetComponent<Renderer>().material.color = normalColor;
+            yield return new WaitForSeconds( .1f );
+    }
+
+    IEnumerator Kill() {
+        GetComponent<Renderer>().material.color = hitColor;
+        yield return new WaitForSeconds( .1f );
+        gameObject.GetComponent<Renderer>().enabled = false;
+        yield return new WaitForSeconds( .5f );
+        deathGUI.gameObject.SetActive( true );
+        //deathGUI.GetComponent<GameOverFadeIn>().dead = true;
+        Destroy( gameObject );
     }
 }

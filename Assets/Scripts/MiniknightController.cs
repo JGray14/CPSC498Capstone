@@ -8,6 +8,7 @@ public class MiniknightController : MonoBehaviour, Enemy {
     private LayerMask groundLayer;
     private Animator animator;
     private GameObject player;
+    public GameObject heartPickupPrefab;
 
     public int health;
     public  int speed = 200;
@@ -15,6 +16,7 @@ public class MiniknightController : MonoBehaviour, Enemy {
     private int jumpBuffer;
     private int jumpPower = 1500;
     public bool attackHit = false;
+    public int iFrames = 0;
 
     public  bool Grounded;
     private bool facingRight = false;
@@ -58,6 +60,9 @@ public class MiniknightController : MonoBehaviour, Enemy {
             jumpNum = 0;
         }
 
+        if ( iFrames > 0 ) {
+            iFrames--;
+        }
         if ( moveRight ) {
             body.AddForce( Vector2.right * speed * 4 );
             moveRight = false;
@@ -76,14 +81,9 @@ public class MiniknightController : MonoBehaviour, Enemy {
             faceLeft();
         }
 
-        if( playerNearby())
-        {
+        if( playerNearby() ) {
             animCall = "Attack";
-
-            
-            
         }
-
 
         if ( animCall != "None" && die != true ) {
             animator.Play( animCall );
@@ -157,7 +157,6 @@ public class MiniknightController : MonoBehaviour, Enemy {
     [Task]
     bool checkRight() {
         Vector2 pos = body.transform.position;
-        Vector2 diagRight = new Vector2( 1, -1 );
         float distance = 1.0f;
         RaycastHit2D wall = Physics2D.Raycast( pos, Vector2.right, distance, groundLayer );
         Vector2 rightpos = new Vector2( body.transform.position.x + 1, body.transform.position.y );
@@ -169,7 +168,7 @@ public class MiniknightController : MonoBehaviour, Enemy {
     bool playerNearby() {
         if ( player != null ) {
             distanceFromPlayer = Vector2.Distance( player.GetComponent<Rigidbody2D>().position, body.position );
-            return ( distanceFromPlayer < 5 || health < 3 );
+            return ( distanceFromPlayer < 10 || health < 3 );
         }
         return ( false );
     }
@@ -194,12 +193,12 @@ public class MiniknightController : MonoBehaviour, Enemy {
 
     IEnumerator Kill() {
         yield return new WaitForSeconds( .4f );
+        Instantiate( heartPickupPrefab, gameObject.transform.position, Quaternion.identity );
         DestroyObject( gameObject );
     }
 
-    IEnumerator WaitToHit()
-    {
-        yield return new WaitForSecondsRealtime(3);
+    IEnumerator WaitToHit() {
+        yield return new WaitForSecondsRealtime(4);
         attackHit = false;
     }
 
@@ -211,11 +210,15 @@ public class MiniknightController : MonoBehaviour, Enemy {
 
     //if enemy is hit
     private void OnTriggerEnter2D(Collider2D other) {
-        if ( other.gameObject.tag == "PlayerHurtbox" ) {
-            damage( meleeAtkDamage, meleeKnockback, Vector3.Normalize( body.transform.position - other.gameObject.transform.position ) );
-        } else if ( other.gameObject.tag == "PlayerProjectileHurtbox" ) {
-            damage( rangedAtkDamage, rangedKnockback, Vector3.Normalize( body.transform.position - other.gameObject.transform.position ) );
-        } else if ( other.gameObject.tag == "Spikes" ) {
+        if ( iFrames <= 0 ) {
+            if ( other.gameObject.tag == "PlayerHurtbox" ) {
+                damage( meleeAtkDamage, meleeKnockback, Vector3.Normalize( body.transform.position - other.gameObject.transform.position ) );
+            } else if ( other.gameObject.tag == "PlayerProjectileHurtbox" ) {
+                damage( rangedAtkDamage, rangedKnockback, Vector3.Normalize( body.transform.position - other.gameObject.transform.position ) );
+            }
+            iFrames = 15;
+        }
+        if ( other.gameObject.tag == "Spikes" ) {
             StartCoroutine( Kill() );
         }
     }
