@@ -22,7 +22,7 @@ public class PlayerControl : MonoBehaviour {
     public  int playerSpeed = 10;
     private int playerJumpNum = 0;
     private int jumpBuffer;
-    private int playerJumpPower = 1500;
+    private int playerJumpPower = 1200; //was 1500
     public bool hasDash;
     public  int DashCooldown = 0;
     private int DashImpulse = 0;
@@ -32,6 +32,7 @@ public class PlayerControl : MonoBehaviour {
     public  int attack1Length;
     public  int attack2Length;
     private string animCall;
+    private bool invincibilityActive = false;
 
     //Damage/knockback values
     private int meleeAtkDamage = 1;
@@ -163,7 +164,6 @@ public class PlayerControl : MonoBehaviour {
 
     IEnumerator Hit() {
         GetComponent<Renderer>().material.color = hitColor;
-        print( "is red" );
         yield return new WaitForSeconds( .1f );
         GetComponent<Renderer>().material.color = normalColor;
         yield return new WaitForSeconds( .1f );
@@ -184,6 +184,11 @@ public class PlayerControl : MonoBehaviour {
         deathGUI.gameObject.SetActive( true );
         //deathGUI.GetComponent<GameOverFadeIn>().dead = true;
         Destroy( gameObject );
+    }
+
+    IEnumerator Invincible()
+    {
+        yield return new WaitForSecondsRealtime(10);
     }
 
 
@@ -259,10 +264,20 @@ public class PlayerControl : MonoBehaviour {
 
     //if player is hit
     private void OnTriggerEnter2D( Collider2D other ) {
-        if ( other.gameObject.tag == "EnemyHurtbox" ) {
-            damage( meleeAtkDamage, meleeKnockback, Vector3.Normalize( playerBody.transform.position - other.gameObject.transform.position ) );
-        } else if ( other.gameObject.tag == "Spikes" ) {
-            StartCoroutine( Kill() );
+        if ( invincibilityActive == false)
+        {
+            if (other.gameObject.tag == "EnemyHurtbox")
+            {
+                damage(meleeAtkDamage, meleeKnockback, Vector3.Normalize(playerBody.transform.position - other.gameObject.transform.position));
+                invincibilityActive = true;
+                StartCoroutine(Invincible());
+                //invincibilityActive = false;
+            }
+            else if (other.gameObject.tag == "Spikes")
+            {
+                StartCoroutine(Kill());
+            }
         }
+        
     }
 }

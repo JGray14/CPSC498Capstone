@@ -14,6 +14,7 @@ public class MiniknightController : MonoBehaviour, Enemy {
     private int jumpNum;
     private int jumpBuffer;
     private int jumpPower = 1500;
+    public bool attackHit = false;
 
     public  bool Grounded;
     private bool facingRight = false;
@@ -74,6 +75,16 @@ public class MiniknightController : MonoBehaviour, Enemy {
         } else {
             faceLeft();
         }
+
+        if( playerNearby())
+        {
+            animCall = "Attack";
+
+            
+            
+        }
+
+
         if ( animCall != "None" && die != true ) {
             animator.Play( animCall );
         }
@@ -158,7 +169,7 @@ public class MiniknightController : MonoBehaviour, Enemy {
     bool playerNearby() {
         if ( player != null ) {
             distanceFromPlayer = Vector2.Distance( player.GetComponent<Rigidbody2D>().position, body.position );
-            return ( distanceFromPlayer < 10 || health < 3 );
+            return ( distanceFromPlayer < 5 || health < 3 );
         }
         return ( false );
     }
@@ -184,6 +195,12 @@ public class MiniknightController : MonoBehaviour, Enemy {
     IEnumerator Kill() {
         yield return new WaitForSeconds( .4f );
         DestroyObject( gameObject );
+    }
+
+    IEnumerator WaitToHit()
+    {
+        yield return new WaitForSecondsRealtime(3);
+        attackHit = false;
     }
 
     public void damage( int value, int force, Vector2 direction ) {

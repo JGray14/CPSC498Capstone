@@ -210,12 +210,8 @@ MonoBehaviour:
   body: {fileID: 50699704008685208}
   health: 0
   speed: 10
+  attackHit: 0
   Grounded: 0
-  distanceFromPlayer: 0
-  right: 0
-  left: 0
-  animCall: 
-  prevCall: 
 --- !u!212 &212994673464119572
 SpriteRenderer:
   m_ObjectHideFlags: 1
