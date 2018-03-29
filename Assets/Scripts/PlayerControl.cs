@@ -279,7 +279,6 @@ public class PlayerControl : MonoBehaviour {
         yield return new WaitForSeconds( .1f );
         gameObject.GetComponent<Renderer>().enabled = false;
         yield return new WaitForSeconds( .5f );
-        Debug.Log("The fuck");
         deathGUI.gameObject.SetActive( true );
         //deathGUI.GetComponent<GameOverFadeIn>().dead = true;
         Destroy( gameObject );
