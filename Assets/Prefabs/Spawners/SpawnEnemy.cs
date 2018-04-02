@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SpawnMKnight : MonoBehaviour {
+public class SpawnEnemy : MonoBehaviour {
 
-    public  GameObject MiniKnightPrefab;
+    public  GameObject enemyPrefab;
     private GameObject player;
     private float distanceFromPlayer;
     private Vector2 pos;
@@ -18,8 +18,8 @@ public class SpawnMKnight : MonoBehaviour {
         if ( player != null ) {
             pos = gameObject.transform.position;
             distanceFromPlayer = Vector2.Distance( player.GetComponent<Rigidbody2D>().position, pos );
-            if ( distanceFromPlayer < 20 ) {
-                Instantiate( MiniKnightPrefab, pos, Quaternion.identity );
+            if ( distanceFromPlayer < 20 && enemyPrefab != null ) {
+                Instantiate( enemyPrefab, pos, Quaternion.identity );
                 Destroy( gameObject );
             }
         }
