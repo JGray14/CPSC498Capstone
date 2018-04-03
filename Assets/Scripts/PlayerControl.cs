@@ -235,16 +235,16 @@ public class PlayerControl : MonoBehaviour {
     //if player is hit
     private void OnTriggerEnter2D( Collider2D other ) {
         if ( iFrames <= 0 ) {
-            if ( other.gameObject.tag == "EnemyHurtbox" ) {
+            if ( other.tag == "EnemyHurtbox" ) {
                 damage(meleeAtkDamage, meleeKnockback, Vector3.Normalize(playerBody.transform.position - other.gameObject.transform.position));
                 StartCoroutine( Hit() );
                 iFrames = 20;
             }
-            else if ( other.gameObject.tag == "Spikes" ) {
+            else if ( other.tag == "Spikes" ) {
                 StartCoroutine( Kill() );
             }
         }
-        if ( other.gameObject.tag == "HeartPickup" ) {
+        if ( other.tag == "HeartPickup" ) {
             if ( playerHealth < 6 ) {
                 playerHealth++;
                 StartCoroutine( Heal() );

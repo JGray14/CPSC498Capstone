@@ -92,7 +92,6 @@ public class MiniknightController : MonoBehaviour, Enemy {
 
     void LateUpdate() {
         if ( die ) {
-            animator.Play( "Die" );
             StartCoroutine( Kill() );
         }
     }
@@ -192,6 +191,7 @@ public class MiniknightController : MonoBehaviour, Enemy {
     }
 
     IEnumerator Kill() {
+        animator.Play( "Die" );
         yield return new WaitForSeconds( .4f );
         Instantiate( heartPickupPrefab, gameObject.transform.position, Quaternion.identity );
         DestroyObject( gameObject );
@@ -211,14 +211,15 @@ public class MiniknightController : MonoBehaviour, Enemy {
     //if enemy is hit
     private void OnTriggerEnter2D(Collider2D other) {
         if ( iFrames <= 0 ) {
-            if ( other.gameObject.tag == "PlayerHurtbox" ) {
+            if ( other.tag == "PlayerHurtbox" ) {
                 damage( meleeAtkDamage, meleeKnockback, Vector3.Normalize( body.transform.position - other.gameObject.transform.position ) );
-            } else if ( other.gameObject.tag == "PlayerProjectileHurtbox" ) {
+                iFrames = 15;
+            } else if ( other.tag == "PlayerProjectileHurtbox" ) {
                 damage( rangedAtkDamage, rangedKnockback, Vector3.Normalize( body.transform.position - other.gameObject.transform.position ) );
+                iFrames = 15;
             }
-            iFrames = 15;
         }
-        if ( other.gameObject.tag == "Spikes" ) {
+        if ( other.tag == "Spikes" ) {
             StartCoroutine( Kill() );
         }
     }

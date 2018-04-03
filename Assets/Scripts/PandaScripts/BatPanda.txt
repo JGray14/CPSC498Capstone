@@ -11,4 +11,4 @@ tree "hunt"
 tree "roost"
 	while
 		not playerNearby
-		roost
+		patrol

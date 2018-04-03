@@ -20,6 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4243501085857838}
   - component: {fileID: 60918283447927664}
+  - component: {fileID: 50976306128634588}
   m_Layer: 0
   m_Name: Hurtbox
   m_TagString: EnemyHurtbox
@@ -68,7 +69,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1833500818403368}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 15.040276, y: -1.842407, z: 0}
+  m_LocalPosition: {x: -9.551949, y: -0.70695657, z: 0}
   m_LocalScale: {x: 10, y: 10, z: 1}
   m_Children:
   - {fileID: 4243501085857838}
@@ -95,6 +96,26 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 4
+--- !u!50 &50976306128634588
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1189502485870770}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!60 &60505083786730540
 PolygonCollider2D:
   m_ObjectHideFlags: 1
@@ -124,11 +145,8 @@ PolygonCollider2D:
       - {x: -0.03212688, y: -0.07108231}
       - {x: 0.031162215, y: -0.07223246}
       - {x: 0.031554963, y: -0.037763476}
-      - {x: 0.070322394, y: -0.04043286}
-      - {x: 0.07000001, y: 0.028734136}
-      - {x: 0.034502983, y: 0.04708587}
       - {x: 0.0320215, y: 0.078780316}
-      - {x: -0.026501728, y: 0.08776758}
+      - {x: -0.02956972, y: 0.0766462}
 --- !u!60 &60918283447927664
 PolygonCollider2D:
   m_ObjectHideFlags: 1
@@ -154,10 +172,8 @@ PolygonCollider2D:
   m_Points:
     m_Paths:
     - - {x: -0.050000764, y: 0.08003764}
-      - {x: -0.07528229, y: 0.0064303875}
-      - {x: -0.08337241, y: -0.004158843}
-      - {x: -0.07490416, y: -0.026759768}
-      - {x: -0.04854231, y: -0.016010195}
+      - {x: -0.12705421, y: -0.02271526}
+      - {x: -0.04854231, y: -0.023680115}
 --- !u!95 &95505860344967986
 Animator:
   serializedVersion: 3
