@@ -222,10 +222,10 @@ public class BatController : MonoBehaviour, Enemy {
         if ( iFrames <= 0 ) {
             if ( other.tag == "PlayerHurtbox" ) {
                 damage( meleeAtkDamage, meleeKnockback, Vector3.Normalize( body.transform.position - other.gameObject.transform.position ) );
-                iFrames = 15;
+                iFrames = 20;
             } else if ( other.tag == "PlayerProjectileHurtbox" ) {
                 damage( rangedAtkDamage, rangedKnockback, Vector3.Normalize( body.transform.position - other.gameObject.transform.position ) );
-                iFrames = 15;
+                iFrames = 20;
             }
         }
         if ( other.gameObject.tag == "Spikes" ) {

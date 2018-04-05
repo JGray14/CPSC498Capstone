@@ -180,7 +180,6 @@ public class PlayerControl : MonoBehaviour {
     }
 
     void Dash() {
-
         DashCooldown = 50;
         if ( facingRight ) {
             playerBody.AddForce( new Vector2( playerDashPower, 0 ), ForceMode2D.Force );
@@ -238,7 +237,7 @@ public class PlayerControl : MonoBehaviour {
             if ( other.tag == "EnemyHurtbox" ) {
                 damage(meleeAtkDamage, meleeKnockback, Vector3.Normalize(playerBody.transform.position - other.gameObject.transform.position));
                 StartCoroutine( Hit() );
-                iFrames = 20;
+                iFrames = 30;
             }
             else if ( other.tag == "Spikes" ) {
                 StartCoroutine( Kill() );
