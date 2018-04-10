@@ -31,8 +31,9 @@ public class UnitControl : MonoBehaviour {
 
 		if (horizontal != 0) {
 			if (walkStartTime == 0) {
-				walkStartTime = Time.time;
+				//walkStartTime = Time.time;
 			}
+			walkStartTime = Time.time;
 			float speed = 0.05f;
 			float dis = 0.1f;
 			if (Time.time - walkStartTime > 2.0f) {

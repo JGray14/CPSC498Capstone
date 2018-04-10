@@ -78,11 +78,6 @@ public class PlayerControl : MonoBehaviour {
         if ( playerHealth <= 0 ) {
             StartCoroutine( Kill() );
         }
-        //setHealth();
-        if ( Input.GetButtonDown( "Cancel" ) ) {
-            //Bring up escape menu here
-            Application.Quit();
-        }
         moveX = Input.GetAxis( "Horizontal" );
         animCall = "None";
         if ( DashCooldown == 1 ) {

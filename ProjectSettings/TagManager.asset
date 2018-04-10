@@ -12,6 +12,7 @@ TagManager:
   - Spikes
   - DeathCanvas
   - HeartPickup
+  - ESCMenu
   layers:
   - Default
   - TransparentFX
