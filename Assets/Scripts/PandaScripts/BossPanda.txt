@@ -5,27 +5,26 @@ tree "Root"
 			notHit
 			notAttacking
 			notEvading
+			notIdle
 		fallback
 			while
 				playerClose
 				random
 					tree( "attack" )
+					tree( "attack" )
+					tree( "attack" )
+					tree( "attack" )
+					tree( "evade" )
 					tree( "evade" )
 					tree( "buff" )
 			random
 				tree( "idle" )
-				sequence
-					healthThreshold
-					tree( "idle" )
-				sequence
-					healthThreshold
-					tree( "idle" )
+				tree( "idle" )
 				tree( "walkToward" )
-				Fail
+			Fail
 
 tree "idle"
-	while idleTimer
-		idle
+	idle
 
 tree "walkToward"
 	while

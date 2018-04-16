@@ -2834,7 +2834,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 0
-  speed: 100
+  speed: 2000
   moving: 0
   attacking: 0
   evading: 0
