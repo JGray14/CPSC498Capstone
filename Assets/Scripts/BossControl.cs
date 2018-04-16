@@ -97,6 +97,16 @@ public class BossControl : MonoBehaviour {
         }
     }
 
+    [Task]
+    void evadeAttack() {
+
+    }
+
+    [Task]
+    void buffSelf() {
+
+    }
+
     public IEnumerator Hit() {
         animator.SetTrigger( "hit_2" );
         GetComponent<Renderer>().material.color = hitColor;

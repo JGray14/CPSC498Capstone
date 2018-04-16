@@ -10,7 +10,11 @@ public class ESCMenu : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         buttons = GameObject.FindGameObjectsWithTag("ESCMenu");
-	}
+        foreach ( GameObject B in buttons ) {
+            B.SetActive( false );
+        }
+
+    }
 	
 	// Update is called once per frame
 	void Update () {
