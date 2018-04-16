@@ -1,0 +1,22 @@
+tree "Root"
+	random
+		tree( "walkToward" )
+		tree( "walkAway" )
+		tree( "moveAttack" )
+		tree( "evadeAttack" )
+		tree( "buff" )
+
+tree "walkToward"
+	walkTowardPlayer
+	
+tree "walkAway"
+	walkAwayPlayer
+	
+tree "moveAttack"
+	moveToAttack
+	
+tree "evadeAttack"
+	evadeAttack
+	
+tree "buff"
+	buffSelf

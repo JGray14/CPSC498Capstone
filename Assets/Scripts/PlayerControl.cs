@@ -57,10 +57,6 @@ public class PlayerControl : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
-        PlayerMove();
-    }
-
-    void PlayerMove() {
         //TESTING SPACE
         //Vector2 diagLeft = new Vector2( -1, -1 );
         //Vector2 leftpos = new Vector2( playerBody.transform.position.x - 1, playerBody.transform.position.y );
