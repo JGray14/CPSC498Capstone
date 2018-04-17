@@ -1470,7 +1470,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4000010000912938
 Transform:
   m_ObjectHideFlags: 1
@@ -2926,6 +2926,8 @@ MonoBehaviour:
   hit: 0
   facingRight: 0
   idling: 0
+  healthThreshold: 0
+  thresholdAnim: 0
   walkTimer: 0
   attackCooldown: 0
   evadeCooldown: 0

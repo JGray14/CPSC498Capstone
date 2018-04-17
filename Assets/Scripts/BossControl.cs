@@ -94,11 +94,12 @@ public class BossControl : MonoBehaviour {
                 body.AddForce( Vector2.left * speed * 4 );
             }
         }
+    }
 
-        if (health < 1)
-        {
-            animator.Play("death");
-            StartCoroutine(death());
+    void LateUpdate() {
+        if ( health < 1 ) {
+            animator.Play( "death" );
+            StartCoroutine( Death() );
         }
     }
 
@@ -122,6 +123,10 @@ public class BossControl : MonoBehaviour {
         }
     }
 
+    [Task]
+    bool notDead() {
+        return( health > 0 );
+    }
     [Task]
     bool towardCheck() {
         if ( walkTimer == 0 ) {
@@ -229,8 +234,7 @@ public class BossControl : MonoBehaviour {
     bool notHit() {
         return( !hit );
     }
-
-<<<<<<< HEAD
+    
     public IEnumerator ThresholdCoroutine() {
         thresholdAnim = true;
         speed = 3000;
@@ -238,15 +242,13 @@ public class BossControl : MonoBehaviour {
         yield return new WaitForSeconds( 1.5f );
         thresholdAnim = false;
     }
-=======
-    public IEnumerator death()
+    public IEnumerator Death()
     {
         yield return new WaitForSeconds(5f);
-        DestroyObject(gameObject);
-        //SceneManager.LoadScene(" ");
+        DestroyObject( gameObject );
+        SceneManager.LoadScene( "WinScreen" );
     }
-
->>>>>>> b9922134702ec1040c6d3abbbff7973f22dd7093
+    
     public IEnumerator idleCoroutine() {
         idling = true;
         if ( prevAction != "Idle" ) {
