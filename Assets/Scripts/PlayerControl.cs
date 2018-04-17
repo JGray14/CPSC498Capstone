@@ -67,7 +67,7 @@ public class PlayerControl : MonoBehaviour {
         //
 
         //Reset incase escape from map borders
-        if ( playerBody.position.y < -20 ) {
+        if ( playerBody.position.y < -50 ) {
             SceneManager.LoadScene( "Main" );
         }
 
