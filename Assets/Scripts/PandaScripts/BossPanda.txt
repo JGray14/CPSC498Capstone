@@ -1,22 +1,40 @@
 tree "Root"
-	random
-		tree( "walkToward" )
-		tree( "walkAway" )
-		tree( "moveAttack" )
-		tree( "evadeAttack" )
-		tree( "buff" )
+	while
+		sequence
+			notKnockback
+			notHit
+			notAttacking
+			notEvading
+			notIdle
+		fallback
+			while
+				playerClose
+				random
+					tree( "attack" )
+					tree( "attack" )
+					tree( "attack" )
+					tree( "evade" )
+					tree( "evade" )
+					tree( "knockback" )
+					tree( "knockback" )
+			random
+				tree( "idle" )
+				tree( "walkToward" )
+			Fail
+
+tree "idle"
+	idle
 
 tree "walkToward"
-	walkTowardPlayer
+	while
+		towardCheck
+		walkTowardPlayer
 	
-tree "walkAway"
-	walkAwayPlayer
+tree "attack"
+	attack
 	
-tree "moveAttack"
-	moveToAttack
+tree "evade"
+	evade
 	
-tree "evadeAttack"
-	evadeAttack
-	
-tree "buff"
-	buffSelf
+tree "knockback"
+	knockbackPlayer
