@@ -2,6 +2,7 @@
 using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class BossControl : MonoBehaviour {
 
@@ -88,7 +89,15 @@ public class BossControl : MonoBehaviour {
                 body.AddForce( Vector2.left * speed * 4 );
             }
         }
+
+        if (health < 1)
+        {
+            animator.Play("death");
+            StartCoroutine(death());
+        }
     }
+
+
 
     void faceRight() {
         if ( !facingRight ) {
@@ -198,6 +207,13 @@ public class BossControl : MonoBehaviour {
     [Task]
     bool notHit() {
         return( !hit );
+    }
+
+    public IEnumerator death()
+    {
+        yield return new WaitForSeconds(5f);
+        DestroyObject(gameObject);
+        //SceneManager.LoadScene(" ");
     }
 
     public IEnumerator idleCoroutine() {
