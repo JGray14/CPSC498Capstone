@@ -2,6 +2,7 @@
 using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class BossControl : MonoBehaviour {
 
@@ -93,7 +94,15 @@ public class BossControl : MonoBehaviour {
                 body.AddForce( Vector2.left * speed * 4 );
             }
         }
+
+        if (health < 1)
+        {
+            animator.Play("death");
+            StartCoroutine(death());
+        }
     }
+
+
 
     void faceRight() {
         if ( !facingRight ) {
@@ -221,6 +230,7 @@ public class BossControl : MonoBehaviour {
         return( !hit );
     }
 
+<<<<<<< HEAD
     public IEnumerator ThresholdCoroutine() {
         thresholdAnim = true;
         speed = 3000;
@@ -228,6 +238,15 @@ public class BossControl : MonoBehaviour {
         yield return new WaitForSeconds( 1.5f );
         thresholdAnim = false;
     }
+=======
+    public IEnumerator death()
+    {
+        yield return new WaitForSeconds(5f);
+        DestroyObject(gameObject);
+        //SceneManager.LoadScene(" ");
+    }
+
+>>>>>>> b9922134702ec1040c6d3abbbff7973f22dd7093
     public IEnumerator idleCoroutine() {
         idling = true;
         if ( prevAction != "Idle" ) {
