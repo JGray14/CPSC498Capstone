@@ -52,7 +52,7 @@ public class PlayerControl : MonoBehaviour {
         hitColor = Color.red;
         healColor = Color.green;
         //hasDash = PlayerPrefs.GetInt( "hasDash" ) == 1;
-        hasDash = true;
+        hasDash = PlayerPrefs.GetInt("hasDash") == 1;
     }
 
     // Update is called once per frame
@@ -244,6 +244,10 @@ public class PlayerControl : MonoBehaviour {
                 StartCoroutine( Heal() );
                 Destroy( other.gameObject );
             }
+        }
+        if ( other.tag == "DashPickup" ) {
+            PlayerPrefs.SetInt( "hasDash", 1 );
+            hasDash = true;
         }
     }
 
