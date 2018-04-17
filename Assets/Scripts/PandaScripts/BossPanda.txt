@@ -1,12 +1,14 @@
 tree "Root"
 	while
 		sequence
+			notThreshold
 			notKnockback
 			notHit
 			notAttacking
 			notEvading
 			notIdle
 		fallback
+			threshold
 			while
 				playerClose
 				random

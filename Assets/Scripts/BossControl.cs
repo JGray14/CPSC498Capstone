@@ -11,7 +11,7 @@ public class BossControl : MonoBehaviour {
     private Rigidbody2D playerBody;
 
     public int health;
-    public float speed = 2000f;
+    public float speed;
     private bool die;
     private string prevAction;
     public bool moving;
@@ -21,6 +21,8 @@ public class BossControl : MonoBehaviour {
     public bool hit;
     public bool facingRight;
     public bool idling;
+    public bool healthThreshold;
+    public bool thresholdAnim;
     public int walkTimer;
     public int attackCooldown;
     public int evadeCooldown;
@@ -44,13 +46,16 @@ public class BossControl : MonoBehaviour {
         //eyes.SetActive( false );
 
         health = 30;
+        speed = 2000f;
         moving = true;
         attacking = false;
         evading = false;
         knockback = false;
         hit = false;
         idling = false;
-        facingRight = true;
+        facingRight = false;
+        healthThreshold = false;
+        thresholdAnim = false;
         attackCooldown = 0;
         evadeCooldown = 0;
         knockbackCooldown = 0;
@@ -196,10 +201,33 @@ public class BossControl : MonoBehaviour {
     }
 
     [Task]
+    bool notThreshold() {
+        return( !thresholdAnim );
+    }
+
+    [Task]
+    void threshold() {
+        if ( !healthThreshold && health < 16 ) {
+            healthThreshold = true;
+            StartCoroutine( ThresholdCoroutine() );
+            Task.current.Succeed();
+        } else {
+            Task.current.Fail();
+        }
+    }
+
+    [Task]
     bool notHit() {
         return( !hit );
     }
 
+    public IEnumerator ThresholdCoroutine() {
+        thresholdAnim = true;
+        speed = 3000;
+        animator.SetTrigger( "idle_2" );
+        yield return new WaitForSeconds( 1.5f );
+        thresholdAnim = false;
+    }
     public IEnumerator idleCoroutine() {
         idling = true;
         if ( prevAction != "Idle" ) {
@@ -211,16 +239,14 @@ public class BossControl : MonoBehaviour {
     }
 
     public IEnumerator Hit() {
-        hit = true;
+        //hit = true;
         changeColor( hitColor );
-        animator.ResetTrigger( "idle_1" );
-        animator.ResetTrigger( "walk" );
-        animator.SetTrigger( "hit_2" );
-        //changeColor( hitColor );
+        //animator.ResetTrigger( "idle_1" );
+        //animator.ResetTrigger( "walk" );
+        //animator.SetTrigger( "hit_2" );
         yield return new WaitForSeconds( 0.2f );
-        //changeColor( normalColor );
         changeColor( normalColor );
-        hit = false;
+        //hit = false;
     }
 
     public IEnumerator Attack() {

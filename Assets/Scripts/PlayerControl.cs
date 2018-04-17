@@ -229,10 +229,10 @@ public class PlayerControl : MonoBehaviour {
     //if player is hit
     private void OnTriggerEnter2D( Collider2D other ) {
         if ( iFrames <= 0 ) {
-            if ( other.tag == "EnemyHurtbox" ) {
+            if ( other.tag == "EnemyHurtbox" && DashImpulse == 0 ) {
                 damage(meleeAtkDamage, meleeKnockback, Vector3.Normalize(playerBody.transform.position - other.gameObject.transform.position));
                 StartCoroutine( Hit() );
-                iFrames = 30;
+                iFrames = 50;
             }
             else if ( other.tag == "Spikes" ) {
                 StartCoroutine( Kill() );
