@@ -13,7 +13,6 @@ TagManager:
   - DeathCanvas
   - HeartPickup
   - ESCMenu
-  - BossEyes
   layers:
   - Default
   - TransparentFX
