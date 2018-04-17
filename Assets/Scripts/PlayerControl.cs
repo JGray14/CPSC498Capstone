@@ -155,11 +155,15 @@ public class PlayerControl : MonoBehaviour {
 
     bool isGrounded() {
         Vector2 pos = transform.position;
+        Vector2 leftpos = new Vector2( transform.position.x - 0.26f, transform.position.y );
+        Vector2 rightpos = new Vector2( transform.position.x + 0.26f, transform.position.y );
         Vector2 direction = Vector2.down;
         float distance = 1.0f;
-        RaycastHit2D hit = Physics2D.Raycast( pos, direction, distance, groundLayer );
+        RaycastHit2D mid = Physics2D.Raycast( pos, direction, distance, groundLayer );
+        RaycastHit2D left = Physics2D.Raycast( leftpos, direction, distance, groundLayer );
+        RaycastHit2D right = Physics2D.Raycast( rightpos, direction, distance, groundLayer );
         //Debug.DrawRay( pos, direction, Color.green );
-        return ( Grounded = hit.collider != null );
+        return ( Grounded = ( left.collider != null ) || ( mid.collider != null ) || ( right.collider != null ) );
 
     }
 
