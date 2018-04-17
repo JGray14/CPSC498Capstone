@@ -1,6 +1,7 @@
 tree "Root"
 	while
 		sequence
+			notDead
 			notThreshold
 			notKnockback
 			notHit
