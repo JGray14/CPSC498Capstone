@@ -1,7 +1,7 @@
 tree "Root"
 	while
 		sequence
-			notBuffing
+			notKnockback
 			notHit
 			notAttacking
 			notEvading
@@ -13,12 +13,11 @@ tree "Root"
 					tree( "attack" )
 					tree( "attack" )
 					tree( "attack" )
-					tree( "attack" )
 					tree( "evade" )
 					tree( "evade" )
-					tree( "buff" )
+					tree( "knockback" )
+					tree( "knockback" )
 			random
-				tree( "idle" )
 				tree( "idle" )
 				tree( "walkToward" )
 			Fail
@@ -37,5 +36,5 @@ tree "attack"
 tree "evade"
 	evade
 	
-tree "buff"
-	buffSelf
+tree "knockback"
+	knockbackPlayer

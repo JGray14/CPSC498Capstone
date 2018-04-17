@@ -1,7 +1,6 @@
 ﻿using Panda;
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class BossControl : MonoBehaviour {
@@ -14,50 +13,50 @@ public class BossControl : MonoBehaviour {
     public int health;
     public float speed = 2000f;
     private bool die;
+    private string prevAction;
     public bool moving;
     public bool attacking;
     public bool evading;
-    public bool buffed;
-    public bool buffing;
+    public bool knockback;
     public bool hit;
     public bool facingRight;
     public bool idling;
+    public int walkTimer;
     public int attackCooldown;
     public int evadeCooldown;
-    public int buffCooldown;
+    public int knockbackCooldown;
     public int iFrames;
     public float playerDistance;
+    public float playerHeight;
 
     private SpriteRenderer[] children;
-    private Color normalColor;
-    private Color buffColor;
-    private Color hitColor;
 
-    private GameObject eyes;
+    private Color normalColor;
+    private Color hitColor;
+    
 
     void Start() {
         animator = this.GetComponent<Animator>();
         body = gameObject.GetComponent<Rigidbody2D>();
         player = GameObject.FindGameObjectWithTag( "Player" );
         playerBody = player.GetComponent<Rigidbody2D>();
-        SpriteRenderer[] children = GetComponentsInChildren<SpriteRenderer>();
-        eyes = GameObject.FindGameObjectWithTag( "BossEyes" );
+        children = GetComponentsInChildren<SpriteRenderer>();
         //eyes.SetActive( false );
 
         health = 30;
         moving = true;
         attacking = false;
         evading = false;
-        buffed = false;
+        knockback = false;
         hit = false;
         idling = false;
         facingRight = true;
         attackCooldown = 0;
         evadeCooldown = 0;
-        buffCooldown = 0;
+        knockbackCooldown = 0;
+        walkTimer = 0;
 
         normalColor = children[0].material.color;
-        buffColor = Color.gray;
         hitColor = Color.red;
     }
 
@@ -69,8 +68,11 @@ public class BossControl : MonoBehaviour {
         if ( evadeCooldown > 0 ) {
             evadeCooldown--;
         }
-        if ( buffCooldown > 0 ) {
-            buffCooldown--;
+        if ( knockbackCooldown > 0 ) {
+            knockbackCooldown--;
+        }
+        if ( walkTimer > 0 ) {
+            walkTimer--;
         }
 
         //if ( moving ) {
@@ -106,24 +108,21 @@ public class BossControl : MonoBehaviour {
         }
     }
 
-    //Task.current.Succeed();
-
-    [Task]
-    bool healthThreshold() {
-        return( health > 15 );
-    }
     [Task]
     bool towardCheck() {
+        if ( walkTimer == 0 ) {
+            walkTimer = 150;
+        } else if ( walkTimer == 1 ) {
+            animator.ResetTrigger( "walk" );
+            return ( false );
+        }
         playerDistance = Math.Abs( player.transform.position.x - body.transform.position.x );
-        return ( playerDistance > 5 );
+        return ( playerDistance > 6 );
     }
 
     [Task]
     void walkTowardPlayer() {
-        animator.ResetTrigger( "idle_1" );
-        animator.ResetTrigger( "evade_1" );
-        animator.ResetTrigger( "skill_1" );
-        animator.ResetTrigger( "skill_2" );
+        prevAction = "Walk";
         animator.SetTrigger( "walk" );
         if ( player.transform.position.x < body.transform.position.x ) {
             faceLeft();
@@ -147,6 +146,7 @@ public class BossControl : MonoBehaviour {
 
     [Task]
     void attack() {
+        prevAction = "Attack";
         attacking = true;
         StartCoroutine( Attack() );
     }
@@ -158,24 +158,30 @@ public class BossControl : MonoBehaviour {
 
     [Task]
     void evade() {
+        prevAction = "Evade";
         if ( evadeCooldown <= 0 ) {
-            evadeCooldown = 100;
-            evading = true;
             StartCoroutine( Evade() );
+            evadeCooldown = 300;
+            evading = true;
+        } else {
+            Task.current.Fail();
         }
     }
 
     [Task]
-    bool notBuffing() {
-        return( !buffing );
+    bool notKnockback() {
+        return( !knockback );
     }
 
     [Task]
-    void buffSelf() {
-        if ( buffCooldown <= 0 ) {
-            buffCooldown = 250;
-            buffing = true;
-            StartCoroutine( Buff() );
+    void knockbackPlayer() {
+        prevAction = "Knockback";
+        if ( knockbackCooldown <= 0 ) {
+            StartCoroutine( knockbackPlayerCoroutine() );
+            knockbackCooldown = 300;
+            knockback = true;
+        } else {
+            Task.current.Fail();
         }
     }
 
@@ -196,28 +202,24 @@ public class BossControl : MonoBehaviour {
 
     public IEnumerator idleCoroutine() {
         idling = true;
-        animator.ResetTrigger( "walk" );
-        animator.SetTrigger( "idle_1" );
-        animator.ResetTrigger( "evade_1" );
-        animator.ResetTrigger( "skill_1" );
-        animator.ResetTrigger( "skill_2" );
-        animator.ResetTrigger( "walk" );
-        animator.ResetTrigger( "hit_2" );
-        yield return new WaitForSeconds( 1.5f );
+        if ( prevAction != "Idle" ) {
+            prevAction = "Idle";
+            animator.SetTrigger( "idle_1" );
+        }
+        yield return new WaitForSeconds( 0.5f );
         idling = false;
     }
 
     public IEnumerator Hit() {
         hit = true;
+        changeColor( hitColor );
         animator.ResetTrigger( "idle_1" );
-        animator.ResetTrigger( "evade_1" );
-        animator.ResetTrigger( "skill_1" );
-        animator.ResetTrigger( "skill_2" );
         animator.ResetTrigger( "walk" );
         animator.SetTrigger( "hit_2" );
         //changeColor( hitColor );
         yield return new WaitForSeconds( 0.2f );
         //changeColor( normalColor );
+        changeColor( normalColor );
         hit = false;
     }
 
@@ -228,12 +230,9 @@ public class BossControl : MonoBehaviour {
             faceRight();
         }
         animator.ResetTrigger( "idle_1" );
-        animator.ResetTrigger( "evade_1" );
-        animator.SetTrigger( "skill_1" );
-        animator.ResetTrigger( "skill_2" );
         animator.ResetTrigger( "walk" );
-        animator.ResetTrigger( "hit_2" );
-        yield return new WaitForSeconds( 2.0f );
+        animator.SetTrigger( "skill_1" );
+        yield return new WaitForSeconds( 1.75f );
         attacking = false;
     }
 
@@ -244,12 +243,12 @@ public class BossControl : MonoBehaviour {
             faceLeft();
         }
         animator.ResetTrigger( "idle_1" );
-        animator.SetTrigger( "evade_1" );
         animator.ResetTrigger( "skill_1" );
         animator.ResetTrigger( "skill_2" );
         animator.ResetTrigger( "walk" );
         animator.ResetTrigger( "hit_2" );
-        yield return new WaitForSeconds( 0.5f );
+        animator.SetTrigger( "evade_1" );
+        yield return new WaitForSeconds( 0.45f );
         evading = false;
         if ( player.transform.position.x < body.transform.position.x ) {
             faceLeft();
@@ -258,32 +257,30 @@ public class BossControl : MonoBehaviour {
         }
     }
 
-    public IEnumerator Buff() {
+    public IEnumerator knockbackPlayerCoroutine() {
+        knockback = true;
         animator.ResetTrigger( "idle_1" );
         animator.ResetTrigger( "evade_1" );
         animator.ResetTrigger( "skill_1" );
-        animator.SetTrigger( "skill_2" );
         animator.ResetTrigger( "walk" );
         animator.ResetTrigger( "hit_2" );
-        buffed = true;
-        eyes.SetActive( true );
+        animator.SetTrigger( "skill_2" );
+        yield return new WaitForSeconds( 0.5f );
         playerDistance = Math.Abs( player.transform.position.x - body.transform.position.x );
-        if ( playerDistance < 9 ) {
-            StartCoroutine( knockbackPlayer() );
+        playerHeight = player.transform.position.y - body.transform.position.y;
+        if ( playerDistance < 13 && playerHeight < 2 ) {
+            for ( int i = 0; i < 20; i++ ) {
+                yield return new WaitForSeconds( 0.01f );
+                playerBody.AddForce( Vector3.Normalize( playerBody.transform.position - body.transform.position ) * 1000 );
+            }
+        } else {
+            for ( int i = 0; i < 20; i++ ) {
+                yield return new WaitForSeconds( 0.01f );
+                playerBody.AddForce( Vector3.Normalize( playerBody.transform.position - body.transform.position ) * 250 );
+            }
         }
-        yield return new WaitForSeconds( 1.0f );
-        buffing = false;
-        yield return new WaitForSeconds( 10.0f );
-        buffed = false;
-        eyes.SetActive( false );
-    }
-
-    public IEnumerator knockbackPlayer() {
-        yield return new WaitForSeconds( 0.2f );
-        for ( int i = 0; i < 10; i++ ) {
-            yield return new WaitForSeconds( 0.01f );
-            playerBody.AddForce( Vector3.Normalize( playerBody.transform.position - body.transform.position ) * 100 + ( 2 * Vector3.up ) );
-        }
+        yield return new WaitForSeconds( 0.5f );
+        knockback = false;
     }
 
     private void changeColor( Color color ) {
