@@ -96,7 +96,7 @@ public class BatController : MonoBehaviour, Enemy {
     bool playerNearby() {
         if ( player != null ) {
             distanceFromPlayer = Vector2.Distance( player.GetComponent<Rigidbody2D>().position, body.position );
-            return ( distanceFromPlayer < 10 || health < 3 );
+            return ( distanceFromPlayer < 8 || health < 3 );
         }
         return ( false );
     }

@@ -6,15 +6,13 @@ public class MiniknightController : MonoBehaviour, Enemy {
 
     public Rigidbody2D body;
     private LayerMask groundLayer;
+    private LayerMask playerLayer;
     private Animator animator;
     private GameObject player;
     public GameObject heartPickupPrefab;
 
     public int health;
     public  int speed = 200;
-    private int jumpNum;
-    private int jumpBuffer;
-    private int jumpPower = 1500;
     public bool attackHit = false;
     public int iFrames = 0;
 
@@ -40,8 +38,8 @@ public class MiniknightController : MonoBehaviour, Enemy {
         body = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         health = 3;
-        jumpNum = 0;
         groundLayer = LayerMask.GetMask( "Ground" );
+        playerLayer = LayerMask.GetMask( "Player" );
         player = GameObject.FindGameObjectWithTag( "Player" );
         moveRight = false;
         moveLeft = false;
@@ -56,9 +54,9 @@ public class MiniknightController : MonoBehaviour, Enemy {
             die = true;
         }
         animCall = "Walk";
-        if ( isGrounded() == true ) {
-            jumpNum = 0;
-        }
+        //if ( isGrounded() == true ) {
+        //    jumpNum = 0;
+        //}
 
         if ( iFrames > 0 ) {
             iFrames--;
@@ -81,7 +79,14 @@ public class MiniknightController : MonoBehaviour, Enemy {
             faceLeft();
         }
 
-        if( playerNearby() ) {
+        Vector2 pos = body.transform.position;
+        RaycastHit2D hit;
+        if ( facingRight ) {
+            hit = Physics2D.Raycast( pos, Vector2.right, 2.5f, playerLayer );
+        } else {
+            hit = Physics2D.Raycast( pos, Vector2.left, 2.5f, playerLayer );
+        }
+        if ( hit.collider != null ) {
             animCall = "Attack";
         }
 
