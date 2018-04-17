@@ -16,6 +16,7 @@ public class MimicController : MonoBehaviour {
     private float speed;
     private int iFrames;
     private int cooldown;
+    public string lastMove;
     private bool moving;
     private bool movingUp, movingDown, movingRight, movingLeft;
     private bool die;
@@ -60,18 +61,22 @@ public class MimicController : MonoBehaviour {
         RaycastHit2D Down = Physics2D.Raycast( pos, Vector2.down, distance, playerLayer );
         RaycastHit2D Right = Physics2D.Raycast( pos, Vector2.right, distance, playerLayer );
         RaycastHit2D Left = Physics2D.Raycast( pos, Vector2.left, distance, playerLayer );
-        if ( Up.collider != null && !moving && cooldown <= 0 ) {
+        if ( Up.collider != null && !moving && cooldown <= 0 && lastMove != "Up" ) {
             movingUp = true;
             moving = true;
-        } else if ( Down.collider != null && !moving && cooldown <= 0 ) {
+            lastMove = "Up";
+        } else if ( Down.collider != null && !moving && cooldown <= 0 && lastMove != "Down" ) {
             movingDown = true;
             moving = true;
-        } else if ( Right.collider != null && !moving && cooldown <= 0 ) {
+            lastMove = "Down";
+        } else if ( Right.collider != null && !moving && cooldown <= 0 && lastMove != "Right" ) {
             movingRight = true;
             moving = true;
-        } else if ( Left.collider != null && !moving && cooldown <= 0 ) {
+            lastMove = "Right";
+        } else if ( Left.collider != null && !moving && cooldown <= 0 && lastMove != "Left" ) {
             movingLeft = true;
             moving = true;
+            lastMove = "Left";
         }
 
         if ( movingUp ) {
